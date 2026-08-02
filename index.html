@@ -8,8 +8,8 @@
       <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body class="grid grid-rows-[31px_auto_45px] h-screen bg-[black] text-white">
-  <header class="header grid grid-cols-[15%_50%_auto] text-white flex justify-between items-center h-[7vh]">
+<body class="grid grid-rows-[31px_auto_30px] h-screen bg-[black] text-white">
+  <header class="header grid grid-cols-[15%_50%_auto] text-white flex justify-between items-center h-[]">
     <div class="left">
       <i class="fa-brands fa-spotify text-white flex justify-center items-center px-[14px] py-[8px]"></i>
     </div>
@@ -17,7 +17,7 @@
       <button class="home bg-[#1f1f1f] rounded-full border-none w-6 h-6 hover:text-white transition-colors duration-200"> 
         <i class="fa-regular fa-house fa-xs text-[#adadad] hover:text-white transition-colors duration-200"></i>
       </button>
-        <div class="busqueda group bg-[#1f1f1f] hover:bg-[#2a2a2a] border-transparent hover:border-white rounded-full text-[8px] text-[#b2b2b2] flex items-center w-[25vw] h-[23px] px-[6px] py-[8px] gap-1 justify-between transition-all duration-200 cursor-pointer">
+        <div class="busqueda group bg-[#1f1f1f] hover:bg-[#2a2a2a] border-transparent hover:border-white rounded-full text-[8px] text-[#b2b2b2] flex items-center w-[18vw] h-[25px] px-[6px] py-[8px] gap-1 justify-between transition-all duration-200 cursor-pointer">
           <div class="left-input flex items-center gap-2">
           <i class="fa-solid fa-magnifying-glass border-none bg-[#1f1f1f] text-[#adadad]"></i>
           <input text="search" placeholder="¿Que quieres reproducir?" class="input bg-[#1f1f1f] outline-none font-medium text-white">
@@ -45,7 +45,7 @@
       </div>
     </div>
   </header>
-  <section class="main-content grid grid-cols-[1fr_650px_140px] h-full w-full gap-1 px-1">
+  <section class="main-content grid grid-cols-[1fr_1060px] h-full w-full gap-1 px-1">
     <aside class="sidebar-left bg-[#121212] border-none rounded-sm py-1 px-2 flex flex-col">
       <div class="aside-top flex items-center justify-between">
         <h2 class="title text-[8px] font-bold tracking-tight">Tu biblioteca</h2>
@@ -87,33 +87,74 @@
       </div>
     </aside>
     <main class="content bg-[#121212] border-none rounded-md">
-      <section class="overflow-y-auto bg-gradient-to-b from-[#292929] from-40% to-black to-60%">
-        <div class=" relative">
-          <img src="images (3).jpg" alt="fondo" class=" h-[40vh] w-[100vw]">
-          <div class="absolute bottom-0 left-0 flex flex-col p-3 text-white">
-            <h2 class="font-extrabold text-[50px]">Web</h2>
-            <p class="text-[9px] font-light">53.711 oyentes mensuales</p>
+      <section class="principal pb-5 pr-0 pt-3 pl-15">
+        <div class="title-music flex items-center justify-between mr-15">
+          <button class="text-[12px] font-bold bg-transparent border-none">Canciones en tendencia</button>
+          <button class="text-[7px] text-[#8d8d8d] border-none bg-transparent">Mostrar todos</button>
+        </div>
+        <div class="grid grid-cols-11 mt-2 gap-2 overflow-x-auto overflow-y-hidden shrink-0">
+          <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02c2764fc6feb1a7d37cf3cc90" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
+            <h3 class="text-[8px]">kiss me</h3>
+            <p class="text-[7px] text-[#6b6b6b]">Ariana Grande</p>
+          </div>
+            <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e028baf677ee2d8dda6cc9fcbd7" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 rounded-md">
+            <h3 class="text-[8px]">kiss me</h3>
+            <p class="text-[7px] text-[#6b6b6b]">Ariana Grande</p>
+          </div>
+            <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02a28f412a17d863410ff9cfbf" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
+            <h3 class="text-[8px]">MATADORA</h3>
+            <p class="text-[7px] text-[#6b6b6b]">KAROL G</p>
+          </div>
+            <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e029e3ee23e56d1e6ff08a9640e" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
+            <h3 class="text-[8px]">BUENAS</h3>
+            <p class="text-[7px] text-[#6b6b6b]">Clarent</p>
+          </div>
+            <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e0268d2c30541264c994aa9bcd5" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
+            <h3 class="text-[8px]">Animal</h3>
+            <p class="text-[7px] text-[#6b6b6b]">KATSEYE</p>
+          </div>
+            <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e029e8d48f27391ce383862b8e8" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
+            <h3 class="text-[8px]">ARNOUREUX</h3>
+            <p class="text-[7px] text-[#6b6b6b]">Alleh</p>
+          </div>
+            <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02bed3161d2cb88d1f959bd88f" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">            
+            <h3 class="text-[8px]">SUPERESTRELLA</h3>
+            <p class="text-[7px] text-[#6b6b6b]">Aitana</p>
+          </div>
+            <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02e9c382b5b9b3221428da47c2" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
+            <h3 class="text-[8px]">REINA CRIMINAL</h3>
+            <p class="text-[7px] text-[#6b6b6b]">Kapo</p>
+          </div>
+            <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02381cc0b011b48e26351d8db9" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
+            <h3 class="text-[8px]">MI BB</h3>
+            <p class="text-[7px] text-[#6b6b6b]">Omar Courtz, Lunay</p>
+          </div>
+            <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02f13afd0b8f47801b5a12e0ab" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
+            <h3 class="text-[8px]">Who</h3>
+            <p class="text-[7px] text-[#6b6b6b]">Jimin</p>
+          </div>
+            <div class="grid-1 flex flex-col justify-center gap-1">
+            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e0287874df3a4339798f01cae2e" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
+            <h3 class="text-[8px]">Efectos Secundarios</h3>
+            <p class="text-[7px] text-[#6b6b6b]">Silvestre Dangond</p>
           </div>
         </div>
-        <div class="section-2 p-4  h-[60vh] w-[100vw]]">
-          <div class="options-section2 flex items-center gap-4">
-            <button class="p-2 rounded-full bg-[#20d761]">
-              <svg data-encore-id="icon" role="img" aria-hidden="true" class="e-10451-icon h-3 w-3" viewBox="0 0 24 24" style="--encore-icon-height: var(--encore-graphic-size-decorative-base); --encore-icon-width: var(--encore-graphic-size-decorative-base);"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606"></path></svg>
-            </button>
-            <svg data-encore-id="icon" role="img" aria-hidden="true" class="e-10451-icon w-5 h-5" viewBox="0 0 24 24" style="--encore-icon-height: var(--encore-graphic-size-decorative-larger); --encore-icon-width: var(--encore-graphic-size-decorative-larger);"><path d="M18.788 3.702a1 1 0 0 1 1.414-1.414L23.914 6l-3.712 3.712a1 1 0 1 1-1.414-1.414L20.086 7h-1.518a5 5 0 0 0-3.826 1.78l-7.346 8.73a7 7 0 0 1-5.356 2.494H1v-2h1.04a5 5 0 0 0 3.826-1.781l7.345-8.73A7 7 0 0 1 18.569 5h1.518l-1.298-1.298z"></path><path d="M18.788 14.289a1 1 0 0 0 0 1.414L20.086 17h-1.518a5 5 0 0 1-3.826-1.78l-1.403-1.668-1.306 1.554 1.178 1.4A7 7 0 0 0 18.568 19h1.518l-1.298 1.298a1 1 0 1 0 1.414 1.414L23.914 18l-3.712-3.713a1 1 0 0 0-1.414 0zM7.396 6.49l2.023 2.404-1.307 1.553-2.246-2.67a5 5 0 0 0-3.826-1.78H1v-2h1.04A7 7 0 0 1 7.396 6.49"></path></svg>
-            <button class="bg-transparent rounded-lg w-10 h-4 border-1 border-gray text-[7px] font-bold ">Seguir</button>
-            <svg data-encore-id="icon" role="img" aria-hidden="true" class="e-10451-icon w-4 h-4 fill-[#4c4c4c]" viewBox="0 0 24 24" style="--encore-icon-height: var(--encore-graphic-size-decorative-larger); --encore-icon-width: var(--encore-graphic-size-decorative-larger);"><path fill="currentColor" d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path></svg>
+          <div class="title-music flex items-center justify-between mr-15 mt-5">
+            <button class="text-[12px] font-bold bg-transparent border-none">Artistas Populares</button>
+            <button class="text-[7px] text-[#8d8d8d] border-none bg-transparent">Mostrar todos</button>
           </div>
-          <div>
-          <h2 class="font-bold text-[15px]">Populares</h2>
-          <div class="grid grid-rows-5">
-            
-          </div>
-          </div>
-        </div>
       </section>
     </main>
-    <aside class="now-playing bg-[#121212] border-none rounded-md">...</aside>
   </section>
   </main>
 </body>
