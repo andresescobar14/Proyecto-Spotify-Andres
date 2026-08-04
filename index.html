@@ -1,161 +1,424 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="/styles.css">
-      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<meta charset="utf-8"/>
+<meta content="width=initial-scale=1.0" name="viewport"/>
+<title>Document</title>
+<link href="/styles.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA==" referrerpolicy="no-referrer" rel="stylesheet"/>
 </head>
-<body class="grid grid-rows-[31px_auto_30px] h-screen bg-[black] text-white">
-  <header class="header grid grid-cols-[15%_50%_auto] text-white flex justify-between items-center h-[]">
-    <div class="left">
-      <i class="fa-brands fa-spotify text-white flex justify-center items-center px-[14px] py-[8px]"></i>
-    </div>
-    <div class="center flex items-center gap-1 justify-center ml-18">
-      <button class="home bg-[#1f1f1f] rounded-full border-none w-6 h-6 hover:text-white transition-colors duration-200"> 
-        <i class="fa-regular fa-house fa-xs text-[#adadad] hover:text-white transition-colors duration-200"></i>
-      </button>
-        <div class="busqueda group bg-[#1f1f1f] hover:bg-[#2a2a2a] border-transparent hover:border-white rounded-full text-[8px] text-[#b2b2b2] flex items-center w-[18vw] h-[25px] px-[6px] py-[8px] gap-1 justify-between transition-all duration-200 cursor-pointer">
-          <div class="left-input flex items-center gap-2">
-          <i class="fa-solid fa-magnifying-glass border-none bg-[#1f1f1f] text-[#adadad]"></i>
-          <input text="search" placeholder="¿Que quieres reproducir?" class="input bg-[#1f1f1f] outline-none font-medium text-white">
-          </div>
-          <div class="right-input flex items-center gap-1 px-1">
-          <div class="divisor w-[1px] h-[15px] bg-[#494949] mx-1">
-          </div>
-          <i class="fa-solid fa-laptop text-[#adadad]"></i>
-          </div>
-        </div>
-        </div>
-    <div class="right flex gap-3 px-2">
-      <div class="buttons flex items-center justify-center">
-      <button class="Premium bg-[white] text-black font-bold text-[7px] rounded-full w-[8vw] h-[15px] hover:bg-[black-100] transition-colors duration-200]">
+<body class="grid grid-rows-[31px_1fr_40px] h-screen bg-[black] text-white">
+<header class="header grid grid-cols-[15%_50%_auto] text-white flex justify-between items-center h-[]">
+<div class="left">
+<i class="fa-brands fa-spotify text-white flex justify-center items-center px-[14px] py-[8px]"></i>
+</div>
+<div class="center flex items-center gap-1 justify-center ml-18">
+<button class="home bg-[#1f1f1f] rounded-full border-none w-6 h-6 hover:text-white transition-colors duration-200">
+<i class="fa-regular fa-house fa-xs text-[#adadad] hover:text-white transition-colors duration-200"></i>
+</button>
+<div class="busqueda group bg-[#1f1f1f] hover:bg-[#2a2a2a] border-transparent hover:border-white rounded-full text-[8px] text-[#b2b2b2] flex items-center w-[18vw] h-[25px] px-[6px] py-[8px] gap-1 justify-between transition-all duration-200 cursor-pointer">
+<div class="left-input flex items-center gap-2">
+<i class="fa-solid fa-magnifying-glass border-none bg-[#1f1f1f] text-[#adadad]"></i>
+<input class="input bg-[#1f1f1f] outline-none font-medium text-white" placeholder="¿Que quieres reproducir?" text="search"/>
+</div>
+<div class="right-input flex items-center gap-1 px-1">
+<div class="divisor w-[1px] h-[15px] bg-[#494949] mx-1">
+</div>
+<i class="fa-solid fa-laptop text-[#adadad]"></i>
+</div>
+</div>
+</div>
+<div class="right flex gap-3 px-2">
+<div class="buttons flex items-center justify-center">
+<button class="Premium bg-[white] text-black font-bold text-[7px] rounded-full w-[8vw] h-[15px] hover:bg-[black-100] transition-colors duration-200]">
         Descubrir Premium
       </button>
-      <button class="bg-[transparent] text-gray-300 text-[7px] font-semibold w-[6vw] h-[15px] hover:text-white transition-colors duration-200">
-        <i class="fa-solid fa-download fa-2xs text-[#adadad]"></i> Instalar app
+<button class="bg-[transparent] text-gray-300 text-[7px] font-semibold w-[6vw] h-[15px] hover:text-white transition-colors duration-200">
+<i class="fa-solid fa-download fa-2xs text-[#adadad]"></i> Instalar app
       </button>
-      </div>
-      <div class="info flex items-center justify-center gap-2">
-      <i class="fa-solid fa-bell fa-2xs text-[#adadad] hover:text-white transition-colors duration-200"></i>
-      <i class="fa-solid fa-people-group fa-2xs text-[#adadad] hover:text-white transition-colors duration-200"></i>
-      <i class="fa-regular fa-circle-user fa-2xs text-[#adadad] hover:text-white transition-colors duration-200]"></i>
+</div>
+<div class="info flex items-center justify-center gap-2">
+<i class="fa-solid fa-bell fa-2xs text-[#adadad] hover:text-white transition-colors duration-200"></i>
+<i class="fa-solid fa-people-group fa-2xs text-[#adadad] hover:text-white transition-colors duration-200"></i>
+<i class="fa-regular fa-circle-user fa-2xs text-[#adadad] hover:text-white transition-colors duration-200]"></i>
+</div>
+</div>
+</header>
+<section class="main-content grid grid-cols-[1fr_1060px] h-full min-h-0 w-full gap-1 px-1">
+<aside class="sidebar-left bg-[#121212] border-none rounded-sm py-1 px-2 flex flex-col">
+<div class="aside-top flex items-center justify-between">
+<h2 class="title text-[8px] font-bold tracking-tight">Tu biblioteca</h2>
+<div class="buttons flex gap-2">
+<button class="plus border-none rounded-full bg-[#1f1f1f] h-6 w-6"><i class="fa-solid fa-plus fa-2xs text-[#adadad]"></i></button>
+<button class="enlarge"><i class="fa-solid fa-up-right-and-down-left-from-center fa-2xs text-[#adadad]"></i></button>
+</div>
+</div>
+<div class="listas">
+<button class="text-[7px] p-1 font-medium rounded-full bg-[#2a2a2a] w-8 text-center">Listas</button>
+<button class="text-[7px] p-1 rounded-full font-medium bg-[#2a2a2a] w-10">Albumes</button>
+</div>
+<div class="busqueda-b flex items-center justify-between">
+<button class="border-none rounded-full"><i class="fa-solid fa-magnifying-glass fa-2xs border-none text-[#a3a3a3]"></i></button>
+<button class="Recientes text-[7px] text-[#adadad]">Recientes <i class="fa-solid fa-list-ul text-[#adadad]"></i></button>
+</div>
+<div class="grid-aside-left grid grid-rows-[1fr_1fr] mt-1 gap-2 w-full">
+<div class="flex items-center gap-2 hover:bg-[#2a2a2a] p-1 -mx-1 -my-1 transition-colors duration-200 cursor-pointer rounded-md">
+<img class="object-cover w-[25px] h-[25px] rounded-sm" src="./images.jpg"/>
+<div class="parrafo flex flex-col justify-center">
+<h2 class="text-[9px] font-medium text-[#5db480]">Andress</h2>
+<p class="text-[7px] font-semibold text-[#b5b5b5]">Lista • Andres</p>
+</div>
+</div>
+<div class="flex items-center gap-2 hover:bg-[#2a2a2a] p-1 -mx-1 -my-1 transition-colors duration-200 cursor-pointer rounded-md">
+<img class="object-cover w-[25px] h-[25px] rounded-sm" src="images (1).jpg"/>
+<div class="parrafo flex flex-col justify-center">
+<h2 class="text-[9px] font-medium text-[white]">Canciones que te gustan</h2>
+<p class="text-[7px] font-semibold text-[#b5b5b5]">Lista • 6 canciones</p>
+</div>
+</div>
+<div class="flex items-center gap-2 hover:bg-[#2a2a2a] p-1 -mx-1 -my-1 transition-colors duration-200 cursor-pointer rounded-md">
+<img class="object-cover w-[25px] h-[25px] rounded-sm" src="images (2).jpg"/>
+<div class="parrafo flex flex-col justify-center min-w-0 flex-1">
+<h2 class="text-[9px] font-medium text-[white] truncate">Shakira: Bzrp Music Sessions YT</h2>
+<p class="text-[7px] font-semibold text-[#b5b5b5] truncate">Sencillo • Bizarrap</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="content bg-[#121212] border-none rounded-md h-full min-h-0 flex flex-col overflow-hidden">
+<section class="principal flex-1 min-h-0 pb-5 pr-0 pt-3 pl-15 overflow-y-auto overflow-x-hidden">
+<!-- Canciones en tendencia -->
+<div class="title-music flex items-center justify-between mr-15">
+<button class="text-[12px] font-bold bg-transparent border-none">Canciones en tendencia</button>
+<button class="text-[7px] text-[#8d8d8d] border-none bg-transparent">Mostrar todos</button>
+</div>
+<div class="grid grid-cols-11 mt-2 gap-2 overflow-x-hidden overflow-y-hidden shrink-0 items-center">
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-3 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02c2764fc6feb1a7d37cf3cc90"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">kiss me</h3>
+<p class="text-[7px] text-[#a2a2a2]">Ariana Grande</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e028baf677ee2d8dda6cc9fcbd7"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">kiss me</h3>
+<p class="text-[7px] text-[#a2a2a2]">Ariana Grande</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02a28f412a17d863410ff9cfbf"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">MATADORA</h3>
+<p class="text-[7px] text-[#a2a2a2]">KAROL G</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e029e3ee23e56d1e6ff08a9640e"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">BUENAS</h3>
+<p class="text-[7px] text-[#a2a2a2]">Clarent</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e0268d2c30541264c994aa9bcd5"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Animal</h3>
+<p class="text-[7px] text-[#a2a2a2]">KATSEYE</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e029e8d48f27391ce383862b8e8"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">ARNOUREUX</h3>
+<p class="text-[7px] text-[#a2a2a2]">Alleh</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02bed3161d2cb88d1f959bd88f"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">SUPERESTRELLA</h3>
+<p class="text-[7px] text-[#a2a2a2]">Aitana</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02e9c382b5b9b3221428da47c2"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">REINA CRIMINAL</h3>
+<p class="text-[7px] text-[#a2a2a2]">Kapo</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02381cc0b011b48e26351d8db9"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">MI BB</h3>
+<p class="text-[7px] text-[#a2a2a2]">KAROL G</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02f13afd0b8f47801b5a12e0ab"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Who</h3>
+<p class="text-[7px] text-[#a2a2a2]">Jimin</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e0287874df3a4339798f01cae2e"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Efectos Secundarios</h3>
+<p class="text-[7px] text-[#a2a2a2]">Silvestre Dangond</p>
+</div>
+</div>
+<!-- Artistas populares -->
+<div class="title-music flex items-center justify-between mr-15 mt-10">
+<button class="text-[12px] font-bold bg-transparent border-none">Artistas populares</button>
+<button class="text-[7px] text-[#8d8d8d] border-none bg-transparent">Mostrar todos</button>
+</div>
+<div class="grid grid-cols-10 gap-2 mr-7 mt-2 mb-7">
+<div class="grid-content hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP _vYcJu3HJyUaRgOu WfGUvErXcmIzJo1c qIwhHcbG780QDz68 rounded-full h-22 w-25 mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab6761610000517466041ce9eb4497057cbc3496"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">KAROL G</h3>
+<p class="text-[7px] text-[#a2a2a2]">Artista</p>
+</div>
+<div class="grid-content hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP _vYcJu3HJyUaRgOu WfGUvErXcmIzJo1c qIwhHcbG780QDz68 rounded-full h-22 w-25 mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab676161000051746d72db3fd29576caa9cb821f"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Rauw Alejandro</h3>
+<p class="text-[7px] text-[#a2a2a2]">Artista</p>
+</div>
+<div class="grid-content hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP _vYcJu3HJyUaRgOu WfGUvErXcmIzJo1c qIwhHcbG780QDz68 rounded-full h-22 w-25 mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab676161000051748e10d05db45e77a86256fc5d"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Beele</h3>
+<p class="text-[7px] text-[#a2a2a2]">Artista</p>
+</div>
+<div class="grid-content hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP _vYcJu3HJyUaRgOu WfGUvErXcmIzJo1c qIwhHcbG780QDz68 rounded-full h-22 w-25 mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab676161000051747e529f4ad13f86c69962cb12"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Feid</h3>
+<p class="text-[7px] text-[#a2a2a2]">Artista</p>
+</div>
+<div class="grid-content hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" class="rounded-full h-22 w-25 mb-1 rounded-full" src="images (4).jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Westcol</h3>
+<p class="text-[7px] text-[#a2a2a2]">Artista</p>
+</div>
+<div class="grid-content hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP _vYcJu3HJyUaRgOu WfGUvErXcmIzJo1c qIwhHcbG780QDz68 rounded-full h-22 w-25 mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab6761610000517481f47f44084e0a09b5f0fa13"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Bad Bunny</h3>
+<p class="text-[7px] text-[#a2a2a2]">Artista</p>
+</div>
+<div class="grid-content hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP _vYcJu3HJyUaRgOu WfGUvErXcmIzJo1c qIwhHcbG780QDz68 rounded-full h-22 w-25 mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616100005174e6252cc367480d8fe43e711f"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Mora</h3>
+<p class="text-[7px] text-[#a2a2a2]">Artista</p>
+</div>
+<div class="grid-content hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP _vYcJu3HJyUaRgOu WfGUvErXcmIzJo1c qIwhHcbG780QDz68 rounded-full h-22 w-25 mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab676161000051746d11079e9ea4fd57b5df6c97"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Danny Ocean</h3>
+<p class="text-[7px] text-[#a2a2a2]">Artista</p>
+</div>
+<div class="grid-content hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP _vYcJu3HJyUaRgOu WfGUvErXcmIzJo1c qIwhHcbG780QDz68 rounded-full h-22 w-25 mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab676161000051740405b03342c2e56751b9923d"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">J Balvin</h3>
+<p class="text-[7px] text-[#a2a2a2]">Artista</p>
+</div>
+<div class="grid-content hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" class="rounded-full h-22 w-25 mb-1 rounded-full" src="iamge7.jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Maluma</h3>
+<p class="text-[7px] text-[#a2a2a2]">Artista</p>
+</div>
+</div>
+<!-- Albumes y sencillos populares -->
+<div class="title-music flex items-center justify-between mr-15">
+<button class="text-[12px] font-bold bg-transparent border-none">Albumes y sencillos populares</button>
+<button class="text-[7px] text-[#8d8d8d] border-none bg-transparent">Mostrar todos</button>
+</div>
+<div class="grid grid-cols-11 mt-2 gap-2 overflow-x-hidden overflow-y-hidden shrink-0 mr-8">
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-3 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-30 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02bbd45c8d36e0e045ef640411"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">DeBÍ TiR FOToS</h3>
+<p class="text-[7px] text-[#a2a2a2]">Bad Bunny</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-27 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e022feb67a486bcf117e7fb15b0"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">BORONDO</h3>
+<p class="text-[7px] text-[#a2a2a2]">Beele</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e024cbf1f88953e2f87db81f9bd"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">LO MISMO</h3>
+<p class="text-[7px] text-[#a2a2a2]">Mora</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e0249d694203245f241a1bcaa72"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Un Verano Sin Ti</h3>
+<p class="text-[7px] text-[#a2a2a2]">Bad Bunny</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e026abd0fcf50a20ac09a028c92"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">LA CIUDAD</h3>
+<p class="text-[7px] text-[#a2a2a2]">Alleh, Yorghaki</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02996764071dbd5240eefb2422"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">PRIMERA MUSA</h3>
+<p class="text-[7px] text-[#a2a2a2]">OmarCourtz</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" class="w-27 h-22 mb-1 rounded-md" src="img9.jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Private Suite (Vol.2)</h3>
+<p class="text-[7px] text-[#a2a2a2]">ROA</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" class="w-27 h-22 mb-1 rounded-md" src="img10.jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Cosa Nuestra</h3>
+<p class="text-[7px] text-[#a2a2a2]">Rauw Alejandro</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02381cc0b011b48e26351d8db9"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">MI BB</h3>
+<p class="text-[7px] text-[#a2a2a2]">KAROL G</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02f13afd0b8f47801b5a12e0ab"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Who</h3>
+<p class="text-[7px] text-[#a2a2a2]">Jimin</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 mb-1 rounded-md" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e0287874df3a4339798f01cae2e"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<h3 class="text-[8px]">Efectos Secundarios</h3>
+<p class="text-[7px] text-[#a2a2a2]">Silvestre Dangond</p>
+</div>
+</div>
+<div class="title-music flex items-center justify-between mr-15 mt-8 mb-2">
+<button class="text-[12px] font-bold bg-transparent border-none">Emisoras populares</button>
+<button class="text-[7px] text-[#8d8d8d] border-none bg-transparent">Mostrar todos</button>
+</div>
+<div class="grid grid-cols-10 gap-2 w-fit mr-8">
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/6IdtcAwaNVAggwd6sCKgTI/es-MX"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2]">Con Caifenes, Leon Larregui,Soda Stereo</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-27 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/1gJdf4Yybu4X5A2xYV3NMV/es-MX"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2]">Con Alfredo Olivas, Joss Favela, El Frizien</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-27 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/5oYHL2SijkMY52gKIhYJNb/es-MX"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2]">Con caifenes, La Ley y mas</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-27 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/1bfl0AU8SqmLkElptOprhC/es-MX"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2]">Con Eden Munoz, Edwin Pina y la Trakelosa</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-27 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/7FsRH5bw8iWpSbMX1G7xf1/es-419"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2]">Con Cardenales De Nuevo Leon,Conjunto</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-27 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/2nszmSgqreHSdJA3zWPyrW/es-419"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2]">Con Alejandro Sanz, Franco Devita y mas</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" class="w-27 h-22 rounded-md mb-1" src="images (5).jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2]">Con Arcangel, Feid, KAROL G y mas</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" class="w-27 h-22 rounded-md mb-1" src="ar.jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2]">Con Alfredo Olivas, Grupo Firme</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" class="w-27 h-22 rounded-md mb-1" src="en.jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2]">Con Tito Double P, Peso Pluma</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" class="w-27 h-22 rounded-md mb-1" src="en (1).jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2]">Con Feid, Bad Bunny, Ozuna y ma.</p>
+</div>
+</div>
+<div class="title-music flex items-center justify-between mr-15 mt-7 mb-2">
+<button class="text-[12px] font-bold bg-transparent border-none">Albumes y sencillos populares</button>
+<button class="text-[7px] text-[#8d8d8d] border-none bg-transparent">Mostrar todos</button>
+</div>
+<div class="grid grid-cols-4 gap-2 w-fit mr-8">
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-22 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://charts-images.scdn.co/assets_generated/locale_es/regional/weekly/region_global_default.jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2] truncate w-22">Con Feid, Bad Bunny, Ozuna y ma.</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-22 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://charts-images.scdn.co/assets/locale_en/regional/daily/region_ve_default.jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2] w-22 truncate">Con Feid, Bad Bunny, Ozuna y ma.</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-22 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://charts-images.scdn.co/assets_generated/locale_es/regional/weekly/region_ve_default.jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2] w-22 truncate">Con Feid, Bad Bunny, Ozuna y ma.</p>
+</div>
+<div class="grid-1 flex flex-col justify-center hover:bg-[#1e1e1e] hover:rounded-md hover:cursor-pointer p-2 -m-2 transition-colors duration-200 group">
+<div class="relative"><img alt="" aria-hidden="false" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP WfGUvErXcmIzJo1c qIwhHcbG780QDz68 w-22 h-22 rounded-md mb-1" data-image-status="loaded" data-testid="card-image" draggable="false" loading="lazy" src="https://charts-images.scdn.co/assets/locale_en/regional/daily/region_global_default.jpg"/><button class="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#1ed760] flex items-center justify-center shadow-lg shadow-black/50 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 hover:bg-[#1fdf64] z-10"><i class="fa-solid fa-play text-black text-[9px] ml-[1px]"></i></button></div>
+<p class="text-[7px] text-[#a2a2a2] w-22 truncate">Con Feid, Bad Bunny, Ozuna y ma.</p>
+</div>
+</div>
+
+<div class="w-full h-[1px] bg-[#292929] mt-15"></div>
+<footer class="mt-6 mb-4">
+<div class="grid grid-cols-[1fr_1fr_1fr_1fr_auto] gap-6 mb-8">
+<div class="flex flex-col gap-2">
+<p class="text-[9px] font-extrabold mb-1">Compañía</p>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Acerca de</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Empleo</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">For the Record</a>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-[9px] font-extrabold mb-1">Comunidades</p>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Para artistas</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Desarrolladores</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Publicidad</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Inversores</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Proveedores</a>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-[9px] font-extrabold mb-1">Enlaces útiles</p>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Asistencia</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">App gratis para movil</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Popular por pais</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Top musica</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Importar musica</a>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-[9px] font-extrabold mb-1">Planes de Spotify</p>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Premium Individual</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Premium Duo</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Premium Familiar</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Spotify Free</a>
+<a class="text-[8px] text-[#a7a7a7] hover:text-white hover:underline w-fit transition-colors duration-200" href="#">Spotify for Students</a>
+</div>
+<div class="flex gap-2 items-start justify-end">
+<button class="w-7 h-7 rounded-full bg-[#292929] hover:bg-[#3a3a3a] flex items-center justify-center transition-colors duration-200">
+<i class="fa-brands fa-instagram text-[10px] text-white"></i>
+</button>
+<button class="w-7 h-7 rounded-full bg-[#292929] hover:bg-[#3a3a3a] flex items-center justify-center transition-colors duration-200">
+<i class="fa-brands fa-x-twitter text-[10px] text-white"></i>
+</button>
+<button class="w-7 h-7 rounded-full bg-[#292929] hover:bg-[#3a3a3a] flex items-center justify-center transition-colors duration-200">
+<i class="fa-brands fa-facebook-f text-[10px] text-white"></i>
+</button>
+</div>
+</div>
+<div class="w-full h-[1px] bg-[#292929] mb-4"></div>
+<div class="flex items-center justify-between flex-wrap gap-3">
+<div class="flex items-center gap-4 flex-wrap">
+<a class="text-[7px] text-[#a7a7a7] hover:text-white hover:underline transition-colors duration-200" href="#">Legal</a>
+<a class="text-[7px] text-[#a7a7a7] hover:text-white hover:underline transition-colors duration-200" href="#">Centro de Seguridad y Privacidad</a>
+<a class="text-[7px] text-[#a7a7a7] hover:text-white hover:underline transition-colors duration-200" href="#">Politica de Privacidad</a>
+<a class="text-[7px] text-[#a7a7a7] hover:text-white hover:underline transition-colors duration-200" href="#">Cookies</a>
+<a class="text-[7px] text-[#a7a7a7] hover:text-white hover:underline transition-colors duration-200" href="#">Informacion sobre anuncios</a>
+<a class="text-[7px] text-[#a7a7a7] hover:text-white hover:underline transition-colors duration-200" href="#">Accesibilidad</a>
+</div>
+<button class="flex items-center gap-1 text-[7px] text-white border border-[#4d4d4d] rounded-full px-2 py-1 hover:border-white transition-colors duration-200">
+<i class="fa-solid fa-globe text-[8px]"></i> Español de Latinoamerica
+    </button>
+</div>
+<div class="flex items-center gap-2 mt-4">
+<i class="fa-brands fa-spotify text-[10px] text-[#a7a7a7]"></i>
+<p class="text-[7px] text-[#a7a7a7]">© 2026 Andres Escobar</p>
+</div>
+</footer>
+</section>
+</main>
+</section>
+  <div class=" m-1 rounded-md signup-bar relative flex items-center justify-between h-full px-2 bg-gradient-to-r from-[#9b1f7e] to-[#4f7ce8] overflow-hidden">
+    <div class="flex items-center gap-3 z-10">
+      <div class="flex flex-col leading-tight justify-center">
+        <p class="text-[7px] font-bold text-white">Muestra de Spotify</p>
+        <p class="text-[7px] text-[#f1f1f1]">Regístrate para escuchar todo lo que quieras con anuncios ocasionales. Sin necesidad de tarjeta de crédito.</p>
       </div>
     </div>
-  </header>
-  <section class="main-content grid grid-cols-[1fr_1060px] h-full w-full gap-1 px-1">
-    <aside class="sidebar-left bg-[#121212] border-none rounded-sm py-1 px-2 flex flex-col">
-      <div class="aside-top flex items-center justify-between">
-        <h2 class="title text-[8px] font-bold tracking-tight">Tu biblioteca</h2>
-        <div class="buttons flex gap-2">
-        <button class="plus border-none rounded-full bg-[#1f1f1f] h-6 w-6"><i class="fa-solid fa-plus fa-2xs text-[#adadad]"></i></button>
-        <button class="enlarge"><i class="fa-solid fa-up-right-and-down-left-from-center fa-2xs text-[#adadad]"></i></button>
-        </div>
-      </div>  
-      <div class="listas">
-        <button class="text-[7px] p-1 font-medium rounded-full bg-[#2a2a2a] w-8 text-center">Listas</button>
-        <button class="text-[7px] p-1 rounded-full font-medium bg-[#2a2a2a] w-10">Albumes</button>
-      </div>
-      <div class="busqueda-b flex items-center justify-between">
-        <button class="border-none rounded-full"><i class="fa-solid fa-magnifying-glass fa-2xs border-none text-[#a3a3a3]"></i></button>
-        <button class="Recientes text-[7px] text-[#adadad]">Recientes <i class="fa-solid fa-list-ul text-[#adadad]"></i></button>
-      </div>
-      <div class="grid-aside-left grid grid-rows-[1fr_1fr] mt-1 gap-2 w-full">
-        <div class="flex items-center gap-2 hover:bg-[#2a2a2a] p-1 -mx-1 -my-1 transition-colors duration-200 cursor-pointer rounded-md">
-          <img src="images.jpg" class="object-cover w-[25px] h-[25px] rounded-sm">
-          <div class="parrafo flex flex-col justify-center">
-            <h2 class="text-[9px] font-medium text-[#5db480]">Andress</h2>
-            <p class="text-[7px] font-semibold text-[#b5b5b5]">Lista • Andres</p>
-          </div>
-        </div>
-          <div class="flex items-center gap-2 hover:bg-[#2a2a2a] p-1 -mx-1 -my-1 transition-colors duration-200 cursor-pointer rounded-md">
-          <img src="images (1).jpg" class="object-cover w-[25px] h-[25px] rounded-sm">
-          <div class="parrafo flex flex-col justify-center">
-            <h2 class="text-[9px] font-medium text-[white]">Canciones que te gustan</h2>
-            <p class="text-[7px] font-semibold text-[#b5b5b5]">Lista • 6 canciones</p>
-          </div>
-        </div>
-          <div class="flex items-center gap-2 hover:bg-[#2a2a2a] p-1 -mx-1 -my-1 transition-colors duration-200 cursor-pointer rounded-md ">
-            <img src="images (2).jpg" class="object-cover w-[25px] h-[25px] rounded-sm">
-            <div class="parrafo flex flex-col justify-center min-w-0 flex-1">
-              <h2 class="text-[9px] font-medium text-[white] truncate">Shakira: Bzrp Music Sessions YT</h2>
-              <p class="text-[7px] font-semibold text-[#b5b5b5] truncate">Sencillo • Bizarrap</p>
-            </div>
-          </div>
-      </div>
-    </aside>
-    <main class="content bg-[#121212] border-none rounded-md">
-      <section class="principal pb-5 pr-0 pt-3 pl-15">
-        <div class="title-music flex items-center justify-between mr-15">
-          <button class="text-[12px] font-bold bg-transparent border-none">Canciones en tendencia</button>
-          <button class="text-[7px] text-[#8d8d8d] border-none bg-transparent">Mostrar todos</button>
-        </div>
-        <div class="grid grid-cols-11 mt-2 gap-2 overflow-x-auto overflow-y-hidden shrink-0">
-          <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02c2764fc6feb1a7d37cf3cc90" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
-            <h3 class="text-[8px]">kiss me</h3>
-            <p class="text-[7px] text-[#6b6b6b]">Ariana Grande</p>
-          </div>
-            <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e028baf677ee2d8dda6cc9fcbd7" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68 w-27 h-22 rounded-md">
-            <h3 class="text-[8px]">kiss me</h3>
-            <p class="text-[7px] text-[#6b6b6b]">Ariana Grande</p>
-          </div>
-            <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02a28f412a17d863410ff9cfbf" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
-            <h3 class="text-[8px]">MATADORA</h3>
-            <p class="text-[7px] text-[#6b6b6b]">KAROL G</p>
-          </div>
-            <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e029e3ee23e56d1e6ff08a9640e" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
-            <h3 class="text-[8px]">BUENAS</h3>
-            <p class="text-[7px] text-[#6b6b6b]">Clarent</p>
-          </div>
-            <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e0268d2c30541264c994aa9bcd5" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
-            <h3 class="text-[8px]">Animal</h3>
-            <p class="text-[7px] text-[#6b6b6b]">KATSEYE</p>
-          </div>
-            <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e029e8d48f27391ce383862b8e8" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
-            <h3 class="text-[8px]">ARNOUREUX</h3>
-            <p class="text-[7px] text-[#6b6b6b]">Alleh</p>
-          </div>
-            <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02bed3161d2cb88d1f959bd88f" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">            
-            <h3 class="text-[8px]">SUPERESTRELLA</h3>
-            <p class="text-[7px] text-[#6b6b6b]">Aitana</p>
-          </div>
-            <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02e9c382b5b9b3221428da47c2" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
-            <h3 class="text-[8px]">REINA CRIMINAL</h3>
-            <p class="text-[7px] text-[#6b6b6b]">Kapo</p>
-          </div>
-            <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02381cc0b011b48e26351d8db9" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
-            <h3 class="text-[8px]">MI BB</h3>
-            <p class="text-[7px] text-[#6b6b6b]">Omar Courtz, Lunay</p>
-          </div>
-            <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e02f13afd0b8f47801b5a12e0ab" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
-            <h3 class="text-[8px]">Who</h3>
-            <p class="text-[7px] text-[#6b6b6b]">Jimin</p>
-          </div>
-            <div class="grid-1 flex flex-col justify-center gap-1">
-            <img aria-hidden="false" draggable="false" loading="lazy" src="https://i.scdn.co/image/ab67616d00001e0287874df3a4339798f01cae2e" data-image-status="loaded" data-testid="card-image" alt="" class="obD7rdENNc2n3fC0 whMS0fh9Ar4I_GaP qIwhHcbG780QDz68  w-27 h-22">
-            <h3 class="text-[8px]">Efectos Secundarios</h3>
-            <p class="text-[7px] text-[#6b6b6b]">Silvestre Dangond</p>
-          </div>
-        </div>
-          <div class="title-music flex items-center justify-between mr-15 mt-5">
-            <button class="text-[12px] font-bold bg-transparent border-none">Artistas Populares</button>
-            <button class="text-[7px] text-[#8d8d8d] border-none bg-transparent">Mostrar todos</button>
-          </div>
-      </section>
-    </main>
-  </section>
-  </main>
+    <div class="flex items-center gap-4 z-10">
+      <button class="bg-white text-black text-[8px] font-bold rounded-full px-4 py-2 hover:scale-105 hover:bg-[#f0f0f0] transition-all duration-200">Registrarse gratis</button>
+    </div>
+    <button class="absolute top-1 right-1 w-4 h-4 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors duration-200 z-10">
+      <i class="fa-solid fa-xmark text-[8px]"></i>
+    </button>
+  </div>
 </body>
 </html>
