@@ -1,0 +1,252 @@
+/* ==========================================================================
+   Spotify Clone - Custom Stylesheet
+   Created for: Proyecto-Spotify-Andres
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Circular+Std:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --spotify-green: #1ed760;
+  --spotify-green-hover: #1fdf64;
+  --spotify-green-active: #169c46;
+  --spotify-black: #121212;
+  --spotify-darker: #000000;
+  --spotify-card-bg: #181818;
+  --spotify-card-hover: #282828;
+  --spotify-subtext: #b3b3b3;
+  --spotify-border: #282828;
+  --spotify-highlight: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--spotify-darker);
+  color: #ffffff;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Custom Scrollbars (Spotify Style) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+/* Subtle scrollbar for sidebar */
+.custom-scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar-thin::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.custom-scrollbar-thin:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+
+/* Spotify Custom Range Sliders */
+.spotify-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #4d4d4d;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.spotify-slider:hover {
+  height: 4px;
+}
+
+.spotify-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.spotify-slider:hover::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.spotify-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.spotify-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.spotify-slider:hover::-moz-range-thumb {
+  opacity: 1;
+}
+
+/* Range fill progress technique */
+.slider-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.slider-progress-bar {
+  position: absolute;
+  left: 0;
+  height: 4px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  pointer-events: none;
+  transition: background-color 0.15s ease;
+}
+
+.slider-container:hover .slider-progress-bar {
+  background-color: var(--spotify-green);
+}
+
+/* Animated Equalizer Bars */
+.equalizer-bar-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  width: 14px;
+}
+
+.equalizer-bar {
+  width: 2px;
+  background-color: var(--spotify-green);
+  border-radius: 1px;
+  animation: equalizerBounce 1.2s ease-in-out infinite alternate;
+}
+
+.equalizer-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+.equalizer-bar:nth-child(2) { height: 90%; animation-delay: 0.3s; }
+.equalizer-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+.equalizer-bar:nth-child(4) { height: 80%; animation-delay: 0.4s; }
+
+@keyframes equalizerBounce {
+  0% { height: 20%; }
+  50% { height: 100%; }
+  100% { height: 35%; }
+}
+
+/* Card Transitions & Glassmorphism */
+.spotify-card {
+  transition: background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s ease;
+}
+
+.spotify-card:hover {
+  background-color: #282828 !important;
+}
+
+.play-button-overlay {
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Header dynamic background on scroll */
+.header-glass {
+  background-color: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Karaoke Lyrics Styling */
+.lyric-line {
+  transition: color 0.3s ease, font-size 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.lyric-line.active {
+  color: #ffffff !important;
+  font-weight: 700;
+  transform: scale(1.04);
+  transform-origin: left;
+}
+
+.lyric-line:hover:not(.active) {
+  color: #ffffff;
+}
+
+/* Heart like animation */
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+.heart-liked {
+  color: var(--spotify-green) !important;
+  animation: heartPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Toast Notifications */
+.toast-notification {
+  animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Truncate multi-line text */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Mobile responsive drawer overlay */
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
