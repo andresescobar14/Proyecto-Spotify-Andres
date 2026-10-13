@@ -52,6 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // Helper Functions
   // =========================================================================
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, (character) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[character]);
+  }
+
   function formatTime(seconds) {
     if (isNaN(seconds) || seconds < 0) return "0:00";
     const mins = Math.floor(seconds / 60);
@@ -343,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // VIEW: SEARCH & BROWSE
   // =========================================================================
   function renderSearch(query = '') {
+    const safeQuery = escapeHtml(query);
     if (!query || query.trim() === '') {
       // Browse All Categories
       viewContainer.innerHTML = `
@@ -372,13 +383,13 @@ document.addEventListener('DOMContentLoaded', () => {
       viewContainer.innerHTML = `
         <div class="px-6 py-4">
           <div class="flex items-center gap-3 mb-6">
-            <h1 class="text-2xl font-bold">Resultados para "<span class="text-[#1ed760]">${query}</span>"</h1>
+            <h1 class="text-2xl font-bold">Resultados para "<span class="text-[#1ed760]">${safeQuery}</span>"</h1>
           </div>
 
           ${filteredSongs.length === 0 && filteredArtists.length === 0 && filteredAlbums.length === 0 ? `
             <div class="flex flex-col items-center justify-center py-20 text-center">
               <i class="fa-solid fa-magnifying-glass text-5xl text-[#535353] mb-4"></i>
-              <h2 class="text-xl font-bold mb-2">No se encontraron resultados para "${query}"</h2>
+              <h2 class="text-xl font-bold mb-2">No se encontraron resultados para "${safeQuery}"</h2>
               <p class="text-sm text-[#b3b3b3] max-w-md">Comprueba que las palabras estén bien escritas o intenta con otras palabras clave.</p>
             </div>
           ` : `
