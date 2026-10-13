@@ -2,6 +2,8 @@
 
 Proyecto educativo en HTML, CSS y JavaScript. Las carátulas y metadatos ilustran el catálogo; los audios son grabaciones de demostración y no corresponden a las canciones anunciadas. No se conecta con cuentas ni servicios de Spotify.
 
+https://andresescobar14.github.io/Proyecto-Spotify-Andres/
+
 ## Cambios
 
 - Corregida la carga de datos que impedía renderizar el contenido.
