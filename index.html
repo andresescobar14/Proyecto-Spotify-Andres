@@ -10,34 +10,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/icons/all.min.css"/>
 
-  <!-- Tailwind CSS CDN with custom configuration -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            spotify: {
-              green: '#1ed760',
-              greenHover: '#1fdf64',
-              greenActive: '#169c46',
-              black: '#121212',
-              darker: '#000000',
-              card: '#181818',
-              hover: '#282828',
-              subtext: '#b3b3b3',
-              border: '#282828'
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
+  <!-- Precompiled utilities: no runtime CSS dependency. -->
+  <link rel="stylesheet" href="assets/utilities.css"/>
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css"/>
@@ -50,7 +26,7 @@
   <header class="h-16 px-4 md:px-6 flex items-center justify-between gap-4 shrink-0 bg-black z-30">
     <!-- Left: Spotify Logo & History Navigation -->
     <div class="flex items-center gap-3 md:gap-4">
-      <button id="mobile-library-toggle" class="md:hidden w-9 h-9 rounded-full bg-[#121212] hover:bg-[#1f1f1f] flex items-center justify-center text-white transition-colors" title="Tu biblioteca">
+      <button id="mobile-library-toggle" aria-controls="sidebar-left" aria-expanded="false" class="md:hidden w-9 h-9 rounded-full bg-[#121212] hover:bg-[#1f1f1f] flex items-center justify-center text-white transition-colors" title="Tu biblioteca" aria-label="Tu biblioteca">
         <i class="fa-solid fa-bookmark text-sm text-[#b3b3b3]"></i>
       </button>
 
@@ -60,10 +36,10 @@
       </div>
 
       <div class="hidden sm:flex items-center gap-2 ml-2">
-        <button id="nav-btn-back" class="w-8 h-8 rounded-full bg-[#121212] hover:bg-[#1f1f1f] flex items-center justify-center text-white disabled:opacity-40 transition-all" title="Retroceder">
+        <button id="nav-btn-back" class="w-8 h-8 rounded-full bg-[#121212] hover:bg-[#1f1f1f] flex items-center justify-center text-white disabled:opacity-40 transition-all" title="Retroceder" aria-label="Retroceder">
           <i class="fa-solid fa-chevron-left text-xs"></i>
         </button>
-        <button id="nav-btn-forward" class="w-8 h-8 rounded-full bg-[#121212] hover:bg-[#1f1f1f] flex items-center justify-center text-white disabled:opacity-40 transition-all" title="Avanzar">
+        <button id="nav-btn-forward" class="w-8 h-8 rounded-full bg-[#121212] hover:bg-[#1f1f1f] flex items-center justify-center text-white disabled:opacity-40 transition-all" title="Avanzar" aria-label="Avanzar">
           <i class="fa-solid fa-chevron-right text-xs"></i>
         </button>
       </div>
@@ -71,23 +47,23 @@
 
     <!-- Center: Home Button & Global Search Pill -->
     <div class="flex items-center gap-2 flex-1 max-w-xl justify-center">
-      <button id="nav-home-btn" class="w-11 h-11 rounded-full bg-[#1f1f1f] hover:bg-[#282828] flex items-center justify-center text-white hover:scale-105 transition-all shrink-0" title="Inicio">
+      <button id="nav-home-btn" class="w-11 h-11 rounded-full bg-[#1f1f1f] hover:bg-[#282828] flex items-center justify-center text-white hover:scale-105 transition-all shrink-0" title="Inicio" aria-label="Inicio">
         <i class="fa-solid fa-house text-lg"></i>
       </button>
 
-      <div class="relative w-full max-w-md group">
+      <div class="relative w-full max-w-md group min-w-0">
         <div class="flex items-center bg-[#1f1f1f] hover:bg-[#282828] focus-within:bg-[#282828] focus-within:ring-2 focus-within:ring-white rounded-full px-3.5 py-2.5 transition-all duration-200">
           <i class="fa-solid fa-magnifying-glass text-[#b3b3b3] group-hover:text-white transition-colors mr-2.5 text-sm"></i>
-          <input id="global-search-input" 
-                 type="text" 
-                 class="bg-transparent border-none outline-none text-white text-sm w-full placeholder-[#757575] font-medium" 
-                 placeholder="¿Qué quieres reproducir?" 
+          <input id="global-search-input" aria-label="Buscar canciones, artistas o álbumes"
+                 type="text"
+                 class="bg-transparent border-none outline-none text-white text-sm w-full placeholder-[#757575] font-medium"
+                 placeholder="¿Qué quieres reproducir?"
                  autocomplete="off"/>
-          <button id="clear-search-btn" class="text-[#b3b3b3] hover:text-white px-1.5 transition-colors hidden" title="Borrar búsqueda">
+          <button id="clear-search-btn" class="text-[#b3b3b3] hover:text-white px-1.5 transition-colors hidden" title="Borrar búsqueda" aria-label="Borrar búsqueda">
             <i class="fa-solid fa-xmark text-sm"></i>
           </button>
           <div class="w-[1px] h-4 bg-[#383838] mx-2"></div>
-          <button class="text-[#b3b3b3] hover:text-white transition-colors" title="Explorar todo">
+          <button class="text-[#b3b3b3] hover:text-white transition-colors" title="Explorar todo" aria-label="Explorar todo">
             <i class="fa-solid fa-layer-group text-sm"></i>
           </button>
         </div>
@@ -96,26 +72,26 @@
 
     <!-- Right: Premium Promo, Install, Notifications & User Avatar -->
     <div class="flex items-center gap-3 shrink-0">
-      <button id="btn-discover-premium" 
+      <button id="btn-discover-premium"
               class="hidden lg:flex items-center bg-white text-black text-xs font-bold px-4 py-2 rounded-full hover:scale-105 hover:bg-[#f0f0f0] transition-all duration-200 shadow-sm">
         Descubrir Premium
       </button>
 
-      <button id="btn-install-app" 
+      <button id="btn-install-app"
               class="hidden md:flex items-center gap-2 text-xs font-bold text-[#b3b3b3] hover:text-white px-3 py-2 rounded-full hover:scale-105 transition-all duration-200">
         <i class="fa-regular fa-circle-down text-sm"></i>
         <span>Instalar app</span>
       </button>
 
-      <button class="w-8 h-8 rounded-full bg-[#121212] hover:bg-[#1f1f1f] flex items-center justify-center text-[#b3b3b3] hover:text-white transition-colors relative" title="Novedades">
+      <button class="w-8 h-8 rounded-full bg-[#121212] hover:bg-[#1f1f1f] flex items-center justify-center text-[#b3b3b3] hover:text-white transition-colors relative" title="Novedades" aria-label="Novedades">
         <i class="fa-regular fa-bell text-sm"></i>
         <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#3d91f4]"></span>
       </button>
 
       <!-- User Profile Menu -->
       <div class="relative">
-        <button id="user-menu-btn" class="w-8 h-8 rounded-full bg-[#1f1f1f] hover:scale-105 transition-transform overflow-hidden border border-white/20 flex items-center justify-center" title="Andres Escobar">
-          <img src="images.jpg" alt="Andres" class="w-full h-full object-cover" onerror="this.src='121148.png'"/>
+        <button id="user-menu-btn" class="w-8 h-8 rounded-full bg-[#1f1f1f] hover:scale-105 transition-transform overflow-hidden border border-white/20 flex items-center justify-center" title="Andres Escobar" aria-label="Andres Escobar">
+          <img src="images.jpg" alt="Andres" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='121148.png'"/>
         </button>
 
         <!-- Dropdown Menu -->
@@ -141,7 +117,7 @@
        MAIN BODY (LEFT SIDEBAR + CENTRAL CONTENT)
        ========================================================================= -->
   <div class="flex-1 min-h-0 px-2 pb-2 flex gap-2 overflow-hidden">
-    
+
     <!-- Mobile Drawer Backdrop Overlay -->
     <div id="mobile-drawer-overlay" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-40 md:hidden transition-opacity"></div>
 
@@ -154,13 +130,13 @@
           <span class="font-bold text-sm md:text-base">Tu biblioteca</span>
         </button>
         <div class="flex items-center gap-1">
-          <button id="btn-create-playlist" class="w-8 h-8 rounded-full hover:bg-[#1f1f1f] flex items-center justify-center text-[#b3b3b3] hover:text-white transition-colors" title="Crear playlist o carpeta">
+          <button id="btn-create-playlist" class="w-8 h-8 rounded-full hover:bg-[#1f1f1f] flex items-center justify-center text-[#b3b3b3] hover:text-white transition-colors" title="Crear playlist o carpeta" aria-label="Crear playlist o carpeta">
             <i class="fa-solid fa-plus text-sm"></i>
           </button>
-          <button id="close-mobile-library" class="md:hidden w-8 h-8 rounded-full hover:bg-[#1f1f1f] flex items-center justify-center text-[#b3b3b3] hover:text-white transition-colors" title="Cerrar">
+          <button id="close-mobile-library" class="md:hidden w-8 h-8 rounded-full hover:bg-[#1f1f1f] flex items-center justify-center text-[#b3b3b3] hover:text-white transition-colors" title="Cerrar" aria-label="Cerrar">
             <i class="fa-solid fa-xmark text-sm"></i>
           </button>
-          <button class="hidden md:flex w-8 h-8 rounded-full hover:bg-[#1f1f1f] items-center justify-center text-[#b3b3b3] hover:text-white transition-colors" title="Mostrar más">
+          <button class="hidden md:flex w-8 h-8 rounded-full hover:bg-[#1f1f1f] items-center justify-center text-[#b3b3b3] hover:text-white transition-colors" title="Mostrar más" aria-label="Mostrar más">
             <i class="fa-solid fa-arrow-right text-xs"></i>
           </button>
         </div>
@@ -176,7 +152,7 @@
 
       <!-- Search in Library & Sort -->
       <div class="px-4 py-2 flex items-center justify-between text-[#b3b3b3]">
-        <button class="w-7 h-7 rounded-full hover:bg-[#1f1f1f] flex items-center justify-center hover:text-white transition-colors" title="Buscar en Tu biblioteca">
+        <button class="w-7 h-7 rounded-full hover:bg-[#1f1f1f] flex items-center justify-center hover:text-white transition-colors" title="Buscar en Tu biblioteca" aria-label="Buscar en Tu biblioteca">
           <i class="fa-solid fa-magnifying-glass text-xs"></i>
         </button>
         <button class="flex items-center gap-1 text-xs font-semibold hover:text-white transition-colors">
@@ -194,6 +170,7 @@
     <!-- CENTRAL MAIN CONTENT (SCROLLABLE SINGLE-PAGE APP VIEWS) -->
     <main id="main-scroll-container" class="flex-1 min-w-0 bg-[#121212] rounded-lg overflow-y-auto overflow-x-hidden relative shadow-2xl border border-white/5">
       <div id="view-container">
+        <noscript><p>Activa JavaScript para ver las tarjetas y usar el reproductor.</p></noscript>
         <!-- Dynamic content: Home, Search, Playlist, Artist, Album rendered by app.js -->
       </div>
     </main>
@@ -203,15 +180,15 @@
        BOTTOM FIXED PLAYER BAR
        ========================================================================= -->
   <footer id="bottom-player" class="h-20 md:h-24 bg-black px-4 flex items-center justify-between border-t border-[#282828] z-40 shrink-0">
-    
+
     <!-- LEFT: Currently Playing Track Info -->
     <div class="flex items-center gap-3.5 w-auto sm:w-1/4 min-w-[140px] max-w-[320px]">
       <div class="relative w-12 h-12 md:w-14 md:h-14 rounded-md overflow-hidden bg-[#282828] shrink-0 shadow-md group cursor-pointer">
-        <img id="player-track-cover" 
-             src="https://i.scdn.co/image/ab67616d00001e02c2764fc6feb1a7d37cf3cc90" 
-             alt="Cover" 
-             class="w-full h-full object-cover" 
-             onerror="this.src='images.jpg'"/>
+        <img id="player-track-cover"
+             src="assets/covers/6c391e8f2783e1f8.jpg"
+             alt="Cover"
+             class="w-full h-full object-cover"
+             onerror="this.onerror=null;this.src='images.jpg'"/>
         <button class="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:scale-110">
           <i class="fa-solid fa-chevron-up text-[10px]"></i>
         </button>
@@ -219,14 +196,14 @@
 
       <div class="flex flex-col min-w-0">
         <h4 id="player-track-title" class="text-xs sm:text-sm font-semibold text-white truncate hover:underline cursor-pointer">kiss me</h4>
-        <p id="player-track-artist" class="text-[11px] sm:text-xs text-[#b3b3b3] truncate hover:text-white hover:underline cursor-pointer">Ariana Grande</p>
+        <p id="player-track-artist" class="text-[11px] sm:text-xs text-[#b3b3b3] truncate hover:text-white hover:underline cursor-pointer">Ariana Grande</p><p id="demo-notice">Proyecto educativo · Audio de demostración</p>
       </div>
 
-      <button id="player-like-btn" class="text-[#b3b3b3] hover:text-white transition-colors ml-1 p-1 hover:scale-110" title="Guardar en Canciones que te gustan">
+      <button id="player-like-btn" class="text-[#b3b3b3] hover:text-white transition-colors ml-1 p-1 hover:scale-110" title="Guardar en Canciones que te gustan" aria-label="Guardar en Canciones que te gustan">
         <i id="player-like-icon" class="fa-regular fa-heart text-base"></i>
       </button>
 
-      <button class="text-[#b3b3b3] hover:text-white transition-colors hidden sm:block p-1 hover:scale-110" title="Ventana flotante">
+      <button class="text-[#b3b3b3] hover:text-white transition-colors hidden sm:block p-1 hover:scale-110" title="Ventana flotante" aria-label="Ventana flotante">
         <i class="fa-regular fa-window-restore text-xs"></i>
       </button>
     </div>
@@ -235,19 +212,19 @@
     <div class="flex flex-col items-center gap-1.5 flex-1 max-w-xl px-2">
       <!-- Buttons row -->
       <div class="flex items-center gap-4 sm:gap-5">
-        <button id="player-shuffle-btn" class="text-[#b3b3b3] hover:text-white transition-colors text-xs sm:text-sm hover:scale-105" title="Activar aleatorio">
+        <button id="player-shuffle-btn" class="text-[#b3b3b3] hover:text-white transition-colors text-xs sm:text-sm hover:scale-105" title="Activar aleatorio" aria-label="Activar aleatorio">
           <i class="fa-solid fa-shuffle"></i>
         </button>
-        <button id="player-prev-btn" class="text-[#b3b3b3] hover:text-white transition-colors text-sm sm:text-base hover:scale-105" title="Anterior">
+        <button id="player-prev-btn" class="text-[#b3b3b3] hover:text-white transition-colors text-sm sm:text-base hover:scale-105" title="Anterior" aria-label="Anterior">
           <i class="fa-solid fa-backward-step"></i>
         </button>
-        <button id="player-play-btn" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white hover:scale-105 hover:bg-[#f0f0f0] text-black flex items-center justify-center shadow-lg transition-all" title="Reproducir">
+        <button id="player-play-btn" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white hover:scale-105 hover:bg-[#f0f0f0] text-black flex items-center justify-center shadow-lg transition-all" title="Reproducir" aria-label="Reproducir">
           <i id="player-play-icon" class="fa-solid fa-play text-sm ml-0.5"></i>
         </button>
-        <button id="player-next-btn" class="text-[#b3b3b3] hover:text-white transition-colors text-sm sm:text-base hover:scale-105" title="Siguiente">
+        <button id="player-next-btn" class="text-[#b3b3b3] hover:text-white transition-colors text-sm sm:text-base hover:scale-105" title="Siguiente" aria-label="Siguiente">
           <i class="fa-solid fa-forward-step"></i>
         </button>
-        <button id="player-repeat-btn" class="text-[#b3b3b3] hover:text-white transition-colors text-xs sm:text-sm hover:scale-105" title="Repetir">
+        <button id="player-repeat-btn" class="text-[#b3b3b3] hover:text-white transition-colors text-xs sm:text-sm hover:scale-105" title="Repetir" aria-label="Repetir">
           <i id="player-repeat-icon" class="fa-solid fa-repeat"></i>
         </button>
       </div>
@@ -255,15 +232,15 @@
       <!-- Timeline Seek Bar -->
       <div class="flex items-center gap-2.5 w-full">
         <span id="player-current-time" class="text-[11px] font-medium text-[#b3b3b3] min-w-[32px] text-right">0:00</span>
-        
+
         <div class="slider-container flex-1">
           <div id="player-progress-bar" class="slider-progress-bar w-0"></div>
-          <input id="player-progress-slider" 
-                 type="range" 
-                 min="0" 
-                 max="100" 
-                 value="0" 
-                 step="0.1" 
+          <input id="player-progress-slider" aria-label="Progreso de reproducción"
+                 type="range"
+                 min="0"
+                 max="100"
+                 value="0"
+                 step="0.1"
                  class="spotify-slider w-full"/>
         </div>
 
@@ -273,39 +250,39 @@
 
     <!-- RIGHT: Extra Controls & Volume Slider -->
     <div class="hidden sm:flex items-center justify-end gap-3 w-1/4 min-w-[140px] max-w-[320px]">
-      <button id="btn-toggle-info" class="text-[#b3b3b3] hover:text-white transition-colors hidden xl:block p-1" title="Vista Ahora suena">
+      <button id="btn-toggle-info" class="text-[#b3b3b3] hover:text-white transition-colors hidden xl:block p-1" title="Vista Ahora suena" aria-label="Vista Ahora suena">
         <i class="fa-regular fa-square-caret-right text-sm"></i>
       </button>
 
-      <button id="btn-toggle-lyrics" class="text-[#b3b3b3] hover:text-white transition-colors p-1 hover:scale-105" title="Letras">
+      <button id="btn-toggle-lyrics" class="text-[#b3b3b3] hover:text-white transition-colors p-1 hover:scale-105" title="Letras" aria-label="Letras">
         <i class="fa-solid fa-microphone text-sm"></i>
       </button>
 
-      <button id="btn-toggle-queue" class="text-[#b3b3b3] hover:text-white transition-colors p-1 hover:scale-105" title="Cola de reproducción">
+      <button id="btn-toggle-queue" aria-controls="queue-panel" aria-expanded="false" class="text-[#b3b3b3] hover:text-white transition-colors p-1 hover:scale-105" title="Cola de reproducción" aria-label="Cola de reproducción">
         <i class="fa-solid fa-list text-sm"></i>
       </button>
 
-      <button class="text-[#b3b3b3] hover:text-white transition-colors hidden sm:block p-1" title="Conectar a un dispositivo">
+      <button class="text-[#b3b3b3] hover:text-white transition-colors hidden sm:block p-1" title="Conectar a un dispositivo" aria-label="Conectar a un dispositivo">
         <i class="fa-solid fa-laptop-file text-sm"></i>
       </button>
 
       <!-- Volume Controls -->
       <div class="flex items-center gap-2">
-        <button id="player-volume-btn" class="text-[#b3b3b3] hover:text-white transition-colors p-1 hover:scale-105" title="Silenciar">
+        <button id="player-volume-btn" class="text-[#b3b3b3] hover:text-white transition-colors p-1 hover:scale-105" title="Silenciar" aria-label="Silenciar">
           <i id="player-volume-icon" class="fa-solid fa-volume-high text-sm"></i>
         </button>
         <div class="slider-container w-20 md:w-24">
           <div id="player-volume-bar" class="slider-progress-bar w-[75%]"></div>
-          <input id="player-volume-slider" 
-                 type="range" 
-                 min="0" 
-                 max="100" 
-                 value="75" 
+          <input id="player-volume-slider" aria-label="Volumen"
+                 type="range"
+                 min="0"
+                 max="100"
+                 value="75"
                  class="spotify-slider w-full"/>
         </div>
       </div>
 
-      <button class="text-[#b3b3b3] hover:text-white transition-colors hidden md:block p-1" title="Pantalla completa">
+      <button class="text-[#b3b3b3] hover:text-white transition-colors hidden md:block p-1" title="Pantalla completa" aria-label="Pantalla completa">
         <i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i>
       </button>
     </div>
@@ -336,13 +313,13 @@
   <!-- =========================================================================
        MODAL: KARAOKE SYNCED LYRICS OVERLAY
        ========================================================================= -->
-  <div id="lyrics-modal" class="hidden fixed inset-0 z-50 bg-gradient-to-b from-[#405060]/95 via-[#1a2530]/95 to-black/95 backdrop-blur-2xl flex flex-col p-6 md:p-12 overflow-y-auto">
+  <div id="lyrics-modal" role="dialog" aria-modal="true" aria-label="Letras de demostración" class="hidden fixed inset-0 z-50 bg-gradient-to-b from-[#405060]/95 via-[#1a2530]/95 to-black/95 backdrop-blur-2xl flex flex-col p-6 md:p-12 overflow-y-auto">
     <div class="flex items-center justify-between mb-8 max-w-4xl mx-auto w-full">
       <div class="flex items-center gap-3">
         <i class="fa-solid fa-microphone text-2xl text-[#1ed760]"></i>
-        <h2 class="text-2xl font-black">Letras sincronizadas</h2>
+        <h2 class="text-2xl font-black">Letras de demostración</h2>
       </div>
-      <button id="close-lyrics-btn" class="w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-colors text-lg" title="Cerrar">
+      <button id="close-lyrics-btn" class="w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-colors text-lg" title="Cerrar" aria-label="Cerrar">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
@@ -355,7 +332,7 @@
   <!-- =========================================================================
        MODAL: SPOTIFY PREMIUM PROMO
        ========================================================================= -->
-  <div id="premium-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+  <div id="premium-modal" role="dialog" aria-modal="true" aria-label="Información de Premium" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
     <div class="bg-[#242424] rounded-2xl max-w-3xl w-full p-6 md:p-8 relative border border-white/10 shadow-2xl overflow-y-auto max-h-[90vh]">
       <button id="close-premium-btn" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#333333] hover:bg-[#444444] flex items-center justify-center text-white transition-colors">
         <i class="fa-solid fa-xmark text-sm"></i>
@@ -420,7 +397,9 @@
   <!-- =========================================================================
        TOAST NOTIFICATIONS CONTAINER
        ========================================================================= -->
-  <div id="toast-container" class="fixed bottom-24 right-6 flex flex-col gap-2 z-50 pointer-events-none"></div>
+  <div id="toast-container" role="status" aria-live="polite" class="fixed bottom-24 right-6 flex flex-col gap-2 z-50 pointer-events-none"></div>
+
+  <aside id="queue-panel" aria-label="Cola de reproducción" hidden></aside>
 
   <!-- JavaScript Modules -->
   <script src="js/data.js"></script>

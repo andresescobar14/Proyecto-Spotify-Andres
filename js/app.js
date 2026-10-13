@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // App State
   let currentView = 'home';
-  let viewHistory = ['home'];
+  let viewHistory = [{ view: 'home', param: null }];
   let historyIndex = 0;
   let activeLibraryFilter = 'all';
   let isLyricsOpen = false;
@@ -52,6 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // Helper Functions
   // =========================================================================
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+  }
+
   function formatTime(seconds) {
     if (isNaN(seconds) || seconds < 0) return "0:00";
     const mins = Math.floor(seconds / 60);
@@ -67,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="w-6 h-6 rounded-full bg-[#1ed760] text-black flex items-center justify-center text-xs shrink-0">
         <i class="fa-solid ${icon}"></i>
       </div>
-      <span>${message}</span>
+      <span>${escapeHTML(message)}</span>
     `;
     toastContainer.appendChild(toast);
     setTimeout(() => {
@@ -89,6 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Navigation / History Controller
   // =========================================================================
   function navigateTo(viewName, param = null) {
+    const previous = viewHistory[historyIndex];
+    if (previous.view === viewName && previous.param === param) return;
     if (historyIndex < viewHistory.length - 1) {
       viewHistory = viewHistory.slice(0, historyIndex + 1);
     }
@@ -127,6 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const current = viewHistory[historyIndex] || { view: 'home' };
     currentView = typeof current === 'string' ? current : current.view;
     const param = current.param;
+    if (searchInput) searchInput.value = currentView === 'search' ? (param || '') : '';
+    document.getElementById('clear-search-btn')?.classList.toggle('hidden', !searchInput?.value);
+    document.querySelectorAll('#mobile-nav-bar button').forEach(button => {
+      const active = button.id === `mobile-nav-${currentView}`;
+      button.classList.toggle('text-white', active);
+      button.classList.toggle('text-[#b3b3b3]', !active);
+      button.setAttribute('aria-current', active ? 'page' : 'false');
+    });
 
     if (mainScrollContainer) {
       mainScrollContainer.scrollTop = 0;
@@ -150,6 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
       renderArtist(param);
     } else if (currentView === 'album') {
       renderAlbum(param);
+    } else if (currentView === 'collection') {
+      renderCollection(param);
     }
   }
 
@@ -166,11 +182,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">${greeting}</h1>
         
         <!-- Top 6 Quick Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+        <div class="quick-grid mb-8">
           ${quickTracks.map(song => `
             <div class="group flex items-center bg-[#282828]/60 hover:bg-[#383838] rounded-md overflow-hidden cursor-pointer transition-all duration-200 relative shadow-md"
                  data-action="play-song" data-id="${song.id}">
-              <img src="${song.cover}" alt="${song.title}" class="w-14 h-14 object-cover shrink-0" onerror="this.src='images.jpg'"/>
+              <img src="${song.cover}" alt="${song.title}" class="w-14 h-14 object-cover shrink-0" onerror="this.onerror=null;this.src='images.jpg'"/>
               <span class="font-bold text-xs sm:text-sm px-3 truncate flex-1">${song.title}</span>
               <button class="w-10 h-10 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200 mr-3 hover:scale-105 shrink-0"
                       title="Reproducir">
@@ -180,13 +196,19 @@ document.addEventListener('DOMContentLoaded', () => {
           `).join('')}
         </div>
 
+        <section class="mb-8" aria-labelledby="mixes-title">
+          <div class="section-heading"><div><p class="eyebrow">TU PRÓXIMO FAVORITO</p><h2 id="mixes-title" class="text-xl md:text-2xl font-bold">Descubre tus mixes</h2></div></div>
+          <div class="card-grid">
+            ${data.playlists.slice(0, 6).map(playlist => renderPlaylistCard(playlist)).join('')}
+          </div>
+        </section>
         <!-- Section: Canciones en tendencia -->
         <div class="mb-8">
           <div class="flex items-center justify-between mb-4">
             <h2 class="text-xl md:text-2xl font-bold hover:underline cursor-pointer">Canciones en tendencia</h2>
-            <button class="text-xs font-bold text-[#b3b3b3] hover:text-white hover:underline transition-colors" data-action="explore-all">Mostrar todos</button>
+            <button class="text-xs font-bold text-[#b3b3b3] hover:text-white hover:underline transition-colors" data-action="explore-all" data-kind="songs">Mostrar todos</button>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
+          <div class="card-grid">
             ${data.songs.slice(0, 8).map(song => renderSongCard(song)).join('')}
           </div>
         </div>
@@ -195,9 +217,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="mb-8">
           <div class="flex items-center justify-between mb-4">
             <h2 class="text-xl md:text-2xl font-bold hover:underline cursor-pointer">Artistas populares</h2>
-            <button class="text-xs font-bold text-[#b3b3b3] hover:text-white hover:underline transition-colors" data-action="explore-artists">Mostrar todos</button>
+            <button class="text-xs font-bold text-[#b3b3b3] hover:text-white hover:underline transition-colors" data-action="explore-all" data-kind="artists">Mostrar todos</button>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
+          <div class="card-grid">
             ${data.artists.slice(0, 8).map(artist => renderArtistCard(artist)).join('')}
           </div>
         </div>
@@ -206,9 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="mb-8">
           <div class="flex items-center justify-between mb-4">
             <h2 class="text-xl md:text-2xl font-bold hover:underline cursor-pointer">Álbumes y sencillos populares</h2>
-            <button class="text-xs font-bold text-[#b3b3b3] hover:text-white hover:underline transition-colors" data-action="explore-albums">Mostrar todos</button>
+            <button class="text-xs font-bold text-[#b3b3b3] hover:text-white hover:underline transition-colors" data-action="explore-all" data-kind="albums">Mostrar todos</button>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
+          <div class="card-grid">
             ${data.albums.map(album => renderAlbumCard(album)).join('')}
           </div>
         </div>
@@ -217,9 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="mb-8">
           <div class="flex items-center justify-between mb-4">
             <h2 class="text-xl md:text-2xl font-bold hover:underline cursor-pointer">Emisoras populares</h2>
-            <button class="text-xs font-bold text-[#b3b3b3] hover:text-white hover:underline transition-colors">Mostrar todos</button>
+            <button class="text-xs font-bold text-[#b3b3b3] hover:text-white hover:underline transition-colors" data-action="explore-all" data-kind="radios">Mostrar todos</button>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
+          <div class="card-grid">
             ${data.radios.map(radio => renderRadioCard(radio)).join('')}
           </div>
         </div>
@@ -228,9 +250,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="mb-12">
           <div class="flex items-center justify-between mb-4">
             <h2 class="text-xl md:text-2xl font-bold hover:underline cursor-pointer">Listas de éxitos</h2>
-            <button class="text-xs font-bold text-[#b3b3b3] hover:text-white hover:underline transition-colors">Mostrar todos</button>
+            <button class="text-xs font-bold text-[#b3b3b3] hover:text-white hover:underline transition-colors" data-action="explore-all" data-kind="playlists">Mostrar todos</button>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          <div class="card-grid">
             ${data.playlists.slice(0, 5).map(playlist => renderPlaylistCard(playlist)).join('')}
           </div>
         </div>
@@ -249,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="spotify-card group bg-[#181818] p-3.5 rounded-lg hover:bg-[#282828] transition-all duration-200 cursor-pointer flex flex-col relative"
            data-action="play-song" data-id="${song.id}">
         <div class="relative w-full aspect-square mb-3.5 rounded-md overflow-hidden bg-[#282828] shadow-md">
-          <img src="${song.cover}" alt="${song.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='images.jpg'"/>
+          <img src="${song.cover}" alt="${song.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='images.jpg'"/>
           <button class="play-button-overlay absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 z-10"
                   title="Reproducir">
             <i class="fa-solid ${isThisPlaying ? 'fa-pause' : 'fa-play'} text-black text-sm ml-0.5"></i>
@@ -276,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="spotify-card group bg-[#181818] p-3.5 rounded-lg hover:bg-[#282828] transition-all duration-200 cursor-pointer flex flex-col relative"
            data-action="view-artist" data-id="${artist.id}">
         <div class="relative w-full aspect-square mb-3.5 rounded-full overflow-hidden bg-[#282828] shadow-md">
-          <img src="${artist.cover}" alt="${artist.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='images (4).jpg'"/>
+          <img src="${artist.cover}" alt="${artist.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='images (4).jpg'"/>
           <button class="play-button-overlay absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 z-10"
                   title="Reproducir">
             <i class="fa-solid fa-play text-black text-sm ml-0.5"></i>
@@ -293,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="spotify-card group bg-[#181818] p-3.5 rounded-lg hover:bg-[#282828] transition-all duration-200 cursor-pointer flex flex-col relative"
            data-action="view-album" data-id="${album.id}">
         <div class="relative w-full aspect-square mb-3.5 rounded-md overflow-hidden bg-[#282828] shadow-md">
-          <img src="${album.cover}" alt="${album.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='img9.jpg'"/>
+          <img src="${album.cover}" alt="${album.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='img9.jpg'"/>
           <button class="play-button-overlay absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 z-10"
                   title="Reproducir">
             <i class="fa-solid fa-play text-black text-sm ml-0.5"></i>
@@ -310,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="spotify-card group bg-[#181818] p-3.5 rounded-lg hover:bg-[#282828] transition-all duration-200 cursor-pointer flex flex-col relative"
            data-action="play-radio" data-id="${radio.id}">
         <div class="relative w-full aspect-square mb-3.5 rounded-md overflow-hidden bg-[#282828] shadow-md">
-          <img src="${radio.cover}" alt="${radio.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='ar.jpg'"/>
+          <img src="${radio.cover}" alt="${radio.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='ar.jpg'"/>
           <button class="play-button-overlay absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 z-10"
                   title="Reproducir">
             <i class="fa-solid fa-play text-black text-sm ml-0.5"></i>
@@ -327,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="spotify-card group bg-[#181818] p-3.5 rounded-lg hover:bg-[#282828] transition-all duration-200 cursor-pointer flex flex-col relative"
            data-action="view-playlist" data-id="${playlist.id}">
         <div class="relative w-full aspect-square mb-3.5 rounded-md overflow-hidden bg-[#282828] shadow-md">
-          <img src="${playlist.cover}" alt="${playlist.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='images (1).jpg'"/>
+          <img src="${playlist.cover}" alt="${playlist.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='images (1).jpg'"/>
           <button class="play-button-overlay absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 z-10"
                   title="Reproducir">
             <i class="fa-solid fa-play text-black text-sm ml-0.5"></i>
@@ -348,14 +370,14 @@ document.addEventListener('DOMContentLoaded', () => {
       viewContainer.innerHTML = `
         <div class="px-6 py-4">
           <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-6">Explorar todo</h1>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mb-12">
+          <div class="card-grid mb-12">
             ${data.categories.map(cat => `
               <div class="group relative ${cat.color} rounded-lg h-36 md:h-44 p-4 overflow-hidden cursor-pointer shadow-lg hover:scale-[1.02] transition-transform duration-200"
                    data-action="filter-category" data-category="${cat.title}">
                 <h3 class="text-lg md:text-xl font-bold text-white break-words w-2/3 leading-tight">${cat.title}</h3>
                 <img src="${cat.cover}" alt="${cat.title}" 
                      class="absolute -bottom-2 -right-4 w-20 md:w-24 h-20 md:h-24 object-cover shadow-2xl rounded-md rotate-[25deg] group-hover:rotate-[20deg] group-hover:scale-105 transition-all duration-300"
-                     onerror="this.src='images.jpg'"/>
+                     onerror="this.onerror=null;this.src='images.jpg'"/>
               </div>
             `).join('')}
           </div>
@@ -365,20 +387,20 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       // Filtered Search Results
       const q = query.toLowerCase().trim();
-      const filteredSongs = data.songs.filter(s => s.title.toLowerCase().includes(q) || s.artist.toLowerCase().includes(q) || s.album.toLowerCase().includes(q));
+      const filteredSongs = data.songs.filter(s => [s.title, s.artist, s.album, s.genre].some(value => value.toLowerCase().includes(q)));
       const filteredArtists = data.artists.filter(a => a.name.toLowerCase().includes(q));
       const filteredAlbums = data.albums.filter(a => a.title.toLowerCase().includes(q) || a.artist.toLowerCase().includes(q));
 
       viewContainer.innerHTML = `
         <div class="px-6 py-4">
           <div class="flex items-center gap-3 mb-6">
-            <h1 class="text-2xl font-bold">Resultados para "<span class="text-[#1ed760]">${query}</span>"</h1>
+            <h1 class="text-2xl font-bold">Resultados para "<span class="text-[#1ed760]">${escapeHTML(query)}</span>"</h1>
           </div>
 
           ${filteredSongs.length === 0 && filteredArtists.length === 0 && filteredAlbums.length === 0 ? `
             <div class="flex flex-col items-center justify-center py-20 text-center">
               <i class="fa-solid fa-magnifying-glass text-5xl text-[#535353] mb-4"></i>
-              <h2 class="text-xl font-bold mb-2">No se encontraron resultados para "${query}"</h2>
+              <h2 class="text-xl font-bold mb-2">No se encontraron resultados para "${escapeHTML(query)}"</h2>
               <p class="text-sm text-[#b3b3b3] max-w-md">Comprueba que las palabras estén bien escritas o intenta con otras palabras clave.</p>
             </div>
           ` : `
@@ -390,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <h2 class="text-xl font-bold mb-3">Resultado principal</h2>
                   <div class="group bg-[#181818] hover:bg-[#282828] p-5 rounded-lg transition-all duration-200 cursor-pointer relative shadow-lg"
                        data-action="play-song" data-id="${filteredSongs[0].id}">
-                    <img src="${filteredSongs[0].cover}" alt="${filteredSongs[0].title}" class="w-24 h-24 rounded-md object-cover shadow-xl mb-4" onerror="this.src='images.jpg'"/>
+                    <img src="${filteredSongs[0].cover}" alt="${filteredSongs[0].title}" class="w-24 h-24 rounded-md object-cover shadow-xl mb-4" onerror="this.onerror=null;this.src='images.jpg'"/>
                     <h3 class="text-2xl font-bold text-white mb-1 truncate">${filteredSongs[0].title}</h3>
                     <p class="text-xs text-[#b3b3b3] mb-3">Canción • <span class="text-white hover:underline">${filteredSongs[0].artist}</span></p>
                     <span class="inline-block bg-[#121212] text-xs font-semibold px-3 py-1 rounded-full text-white">Canción</span>
@@ -411,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
                          data-action="play-song" data-id="${song.id}">
                       <div class="flex items-center gap-3 min-w-0">
                         <div class="relative w-10 h-10 shrink-0">
-                          <img src="${song.cover}" alt="${song.title}" class="w-10 h-10 rounded object-cover" onerror="this.src='images.jpg'"/>
+                          <img src="${song.cover}" alt="${song.title}" class="w-10 h-10 rounded object-cover" onerror="this.onerror=null;this.src='images.jpg'"/>
                           <button class="absolute inset-0 bg-black/50 rounded flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                             <i class="fa-solid fa-play text-white text-xs"></i>
                           </button>
@@ -438,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${filteredArtists.length > 0 ? `
               <div class="mb-10">
                 <h2 class="text-xl font-bold mb-4">Artistas</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="card-grid">
                   ${filteredArtists.map(artist => renderArtistCard(artist)).join('')}
                 </div>
               </div>
@@ -448,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${filteredAlbums.length > 0 ? `
               <div class="mb-10">
                 <h2 class="text-xl font-bold mb-4">Álbumes</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="card-grid">
                   ${filteredAlbums.map(album => renderAlbumCard(album)).join('')}
                 </div>
               </div>
@@ -479,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="flex flex-col md:flex-row items-end gap-6 p-6 pb-6 bg-gradient-to-b ${playlist.gradient || 'from-[#503750] to-[#121212]'} pt-12 md:pt-16 shadow-2xl">
           <img src="${playlist.cover}" alt="${playlist.title}" 
                class="w-48 h-48 md:w-56 md:h-56 object-cover rounded-md shadow-2xl shrink-0" 
-               onerror="this.src='images (1).jpg'"/>
+               onerror="this.onerror=null;this.src='images (1).jpg'"/>
           <div class="flex flex-col gap-2 min-w-0">
             <span class="text-xs uppercase font-extrabold tracking-wider">Playlist pública</span>
             <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">${playlist.title}</h1>
@@ -522,6 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <!-- Table Rows -->
+          ${playlistSongs.length ? '' : '<p class="py-8 text-center text-sm text-[#b3b3b3]">Tu lista está vacía. Explora canciones desde Inicio o Buscar.</p>'}
           <div class="flex flex-col">
             ${playlistSongs.map((song, index) => {
               const isPlaying = player.currentTrack?.id === song.id && player.isPlaying;
@@ -537,7 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <!-- Title & Cover -->
                   <div class="flex items-center gap-3 min-w-0">
-                    <img src="${song.cover}" alt="${song.title}" class="w-10 h-10 object-cover rounded shrink-0 shadow" onerror="this.src='images.jpg'"/>
+                    <img src="${song.cover}" alt="${song.title}" class="w-10 h-10 object-cover rounded shrink-0 shadow" onerror="this.onerror=null;this.src='images.jpg'"/>
                     <div class="min-w-0">
                       <div class="font-semibold text-white truncate hover:underline ${isPlaying ? 'text-[#1ed760]' : ''}">${song.title}</div>
                       <div class="text-xs text-[#b3b3b3] truncate hover:text-white">${song.artist}</div>
@@ -611,7 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
                    data-action="play-song" data-id="${song.id}">
                 <div class="flex items-center gap-4 min-w-0">
                   <span class="w-4 text-center font-bold text-xs">${idx + 1}</span>
-                  <img src="${song.cover}" alt="${song.title}" class="w-10 h-10 object-cover rounded shrink-0 shadow" onerror="this.src='images.jpg'"/>
+                  <img src="${song.cover}" alt="${song.title}" class="w-10 h-10 object-cover rounded shrink-0 shadow" onerror="this.onerror=null;this.src='images.jpg'"/>
                   <span class="font-bold text-white truncate hover:underline">${song.title}</span>
                 </div>
                 <div class="text-xs text-[#b3b3b3] hidden sm:block">${song.plays}</div>
@@ -654,7 +677,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div>
         <!-- Hero Header -->
         <div class="flex flex-col md:flex-row items-end gap-6 p-6 pb-6 bg-gradient-to-b from-[#405060] to-[#121212] pt-12 md:pt-16 shadow-2xl">
-          <img src="${album.cover}" alt="${album.title}" class="w-48 h-48 md:w-56 md:h-56 object-cover rounded-md shadow-2xl shrink-0" onerror="this.src='img9.jpg'"/>
+          <img src="${album.cover}" alt="${album.title}" class="w-48 h-48 md:w-56 md:h-56 object-cover rounded-md shadow-2xl shrink-0" onerror="this.onerror=null;this.src='img9.jpg'"/>
           <div class="flex flex-col gap-2 min-w-0">
             <span class="text-xs uppercase font-extrabold tracking-wider">Álbum</span>
             <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">${album.title}</h1>
@@ -671,7 +694,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- Action Bar -->
         <div class="flex items-center gap-6 px-6 py-5 bg-[#121212]/90 sticky top-0 z-20 backdrop-blur-md">
           <button class="w-14 h-14 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-xl hover:scale-105 transition-all duration-200"
-                  data-action="play-song" data-id="${albumSongs[0]?.id}" title="Reproducir">
+                  data-action="play-album" data-id="${album.id}" title="Reproducir">
             <i class="fa-solid fa-play text-black text-xl ml-0.5"></i>
           </button>
           <button class="text-3xl text-[#1ed760] hover:scale-105 transition-transform">
@@ -827,7 +850,7 @@ document.addEventListener('DOMContentLoaded', () => {
            data-action="view-${item.type}" data-id="${item.id}">
         <img src="${item.cover}" alt="${item.title}" 
              class="w-12 h-12 object-cover shrink-0 ${item.isRound ? 'rounded-full' : 'rounded-md'} shadow"
-             onerror="this.src='images (1).jpg'"/>
+             onerror="this.onerror=null;this.src='images (1).jpg'"/>
         <div class="flex flex-col min-w-0 flex-1">
           <h3 class="text-sm font-semibold text-white truncate group-hover:text-[#1ed760] transition-colors">${item.title}</h3>
           <div class="flex items-center gap-1.5 text-xs text-[#b3b3b3] truncate">
@@ -856,6 +879,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     data.playlists.unshift(newPlaylist);
+    window.spotifyStorage.write('spotify_playlists', data.playlists.filter(list => list.id.startsWith('playlist-custom-')));
     renderLibrary();
     navigateTo('playlist', newId);
     showToast(`Se ha creado "${newPlaylist.title}"`, 'fa-circle-plus');
@@ -864,103 +888,71 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // EVENT BINDINGS
   // =========================================================================
-  function bindInteractiveEvents() {
-    // Song playback triggers
-    document.querySelectorAll('[data-action="play-song"]').forEach(el => {
-      el.addEventListener('click', (e) => {
-        // Prevent toggle like clicks inside song row from triggering playback
-        if (e.target.closest('[data-action="toggle-like"]')) return;
-        
-        const songId = el.getAttribute('data-id');
-        const song = data.songs.find(s => s.id === songId);
-        if (song) {
-          if (player.currentTrack?.id === song.id) {
-            player.togglePlay();
-          } else {
-            player.playTrack(song);
-          }
-        }
-      });
-    });
+  function renderCollection(kind) {
+    const collections = {
+      songs: ['Todas las canciones', data.songs, renderSongCard],
+      artists: ['Todos los artistas', data.artists, renderArtistCard],
+      albums: ['Todos los álbumes', data.albums, renderAlbumCard],
+      radios: ['Todas las emisoras', data.radios, renderRadioCard],
+      playlists: ['Todas las listas', data.playlists, renderPlaylistCard]
+    };
+    const [title, items, render] = collections[kind] || collections.songs;
+    viewContainer.innerHTML = `<div class="px-6 py-4"><h1 class="text-2xl font-bold mb-6">${title}</h1><div class="card-grid">${items.map(render).join('')}</div>${renderFooter()}</div>`;
+    bindInteractiveEvents();
+  }
 
-    // View triggers
-    document.querySelectorAll('[data-action="view-artist"]').forEach(el => {
-      el.addEventListener('click', () => {
-        navigateTo('artist', el.getAttribute('data-id'));
-      });
-    });
-
-    document.querySelectorAll('[data-action="view-album"]').forEach(el => {
-      el.addEventListener('click', () => {
-        navigateTo('album', el.getAttribute('data-id'));
-      });
-    });
-
-    document.querySelectorAll('[data-action="view-playlist"]').forEach(el => {
-      el.addEventListener('click', () => {
-        navigateTo('playlist', el.getAttribute('data-id'));
-      });
-    });
-
-    // Play radio triggers
-    document.querySelectorAll('[data-action="play-radio"]').forEach(el => {
-      el.addEventListener('click', () => {
-        const radio = data.radios.find(r => r.id === el.getAttribute('data-id'));
-        if (radio && radio.trackIds.length > 0) {
-          const firstSong = data.songs.find(s => s.id === radio.trackIds[0]);
-          if (firstSong) {
-            const radioQueue = radio.trackIds.map(id => data.songs.find(s => s.id === id)).filter(Boolean);
-            player.playTrack(firstSong, radioQueue);
-            showToast(`Reproduciendo ${radio.title}`, 'fa-radio');
-          }
-        }
-      });
-    });
-
-    // Like toggles
-    document.querySelectorAll('[data-action="toggle-like"]').forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const songId = el.getAttribute('data-id');
-        const isLiked = player.toggleLike(songId);
-        
-        // Update DOM
-        const icon = el.querySelector('i');
-        if (icon) {
-          icon.className = `fa-${isLiked ? 'solid' : 'regular'} fa-heart`;
-          el.classList.toggle('text-[#1ed760]', isLiked);
-          el.classList.toggle('heart-liked', isLiked);
-        }
-
-        renderLibrary();
-        showToast(isLiked ? "Añadido a tus canciones que te gustan" : "Eliminado de tus canciones que te gustan", isLiked ? 'fa-heart' : 'fa-xmark');
-      });
-    });
-
-    // Category filter clicks
-    document.querySelectorAll('[data-action="filter-category"]').forEach(el => {
-      el.addEventListener('click', () => {
-        const category = el.getAttribute('data-category');
-        if (searchInput) {
-          searchInput.value = category;
-          renderSearch(category);
-        }
+  function makeAccessible(container) {
+    container.querySelectorAll('[data-action]').forEach(element => {
+      if (element.tagName !== 'BUTTON') {
+        element.setAttribute('role', 'button');
+        element.tabIndex = 0;
+      }
+      element.querySelectorAll('button').forEach(button => {
+        if (!button.hasAttribute('aria-label')) button.setAttribute('aria-label', button.title || 'Reproducir');
       });
     });
   }
+  function bindInteractiveEvents() { makeAccessible(viewContainer); }
+  function bindLibraryEvents() { makeAccessible(libraryListContainer); }
 
-  function bindLibraryEvents() {
-    document.querySelectorAll('[data-action^="view-"]').forEach(el => {
-      el.addEventListener('click', () => {
-        if (typeof closeMobileLibrary === 'function') closeMobileLibrary();
-        const action = el.getAttribute('data-action');
-        const id = el.getAttribute('data-id');
-        if (action === 'view-playlist') navigateTo('playlist', id);
-        if (action === 'view-artist') navigateTo('artist', id);
-        if (action === 'view-album') navigateTo('album', id);
-      });
-    });
+  function handleAction(event) {
+    const element = event.target.closest('[data-action]');
+    if (!element || !event.currentTarget.contains(element)) return;
+    const action = element.dataset.action;
+    const id = element.dataset.id;
+    if (action.startsWith('view-')) {
+      closeMobileLibrary();
+      navigateTo(action.slice(5), id);
+    } else if (action === 'play-song') {
+      const song = data.songs.find(song => song.id === id);
+      if (song) player.currentTrack?.id === id ? player.togglePlay() : player.playTrack(song);
+    } else if (['play-playlist', 'play-album', 'play-radio'].includes(action)) {
+      const collection = data[action === 'play-playlist' ? 'playlists' : action === 'play-album' ? 'albums' : 'radios'].find(item => item.id === id);
+      const queue = collection?.trackIds.map(trackId => data.songs.find(song => song.id === trackId)).filter(Boolean) || [];
+      if (!queue.length) return showToast('Esta lista todavía no tiene canciones.', 'fa-music');
+      if (player.isPlaying && player.currentTrack?.id === queue[0].id && player.queue.map(track => track.id).join(',') === queue.map(track => track.id).join(',')) player.pause();
+      else player.playTrack(queue[0], queue);
+    } else if (action === 'toggle-like') {
+      const liked = player.toggleLike(id);
+      syncPlayerUI(player.currentTrack);
+      const scroll = mainScrollContainer.scrollTop;
+      renderCurrentView(); mainScrollContainer.scrollTop = scroll;
+      renderLibrary();
+      showToast(liked ? 'Añadido a tus canciones que te gustan' : 'Eliminado de tus canciones que te gustan');
+    } else if (action === 'filter-category') {
+      navigateTo('search', element.dataset.category);
+    } else if (action === 'explore-all') {
+      navigateTo('collection', element.dataset.kind);
+    }
   }
+  [viewContainer, libraryListContainer].forEach(container => {
+    container.addEventListener('click', handleAction);
+    container.addEventListener('keydown', event => {
+      if (event.target.matches('[role="button"]') && ['Enter', ' '].includes(event.key)) {
+        event.preventDefault(); event.target.click();
+      }
+    });
+  });
 
   // =========================================================================
   // BOTTOM PLAYER REACTIVE SYNC
@@ -1003,26 +995,33 @@ document.addEventListener('DOMContentLoaded', () => {
   // Hook into SpotifyPlayer events
   player.on('onTrackChange', (track) => {
     syncPlayerUI(track);
-    renderCurrentView(); // Refresh active highlights
+    const scroll = mainScrollContainer.scrollTop;
+    renderCurrentView();
+    mainScrollContainer.scrollTop = scroll;
+    renderQueue();
   });
 
   player.on('onPlayStateChange', ({ isPlaying }) => {
     if (playerPlayIcon) {
       playerPlayIcon.className = `fa-solid ${isPlaying ? 'fa-pause' : 'fa-play'} text-black text-sm ml-0.5`;
     }
+    playerPlayBtn?.setAttribute('aria-label', isPlaying ? 'Pausar' : 'Reproducir');
     // Update play button icons in view
     document.querySelectorAll('[data-action="play-song"]').forEach(card => {
       const id = card.getAttribute('data-id');
       const icon = card.querySelector('.play-button-overlay i, button i');
-      if (id === player.currentTrack?.id && icon) {
-        icon.className = `fa-solid ${isPlaying ? 'fa-pause' : 'fa-play'} text-black text-sm ml-0.5`;
+      const active = id === player.currentTrack?.id && isPlaying;
+      card.classList.toggle('is-playing', active);
+      card.setAttribute('aria-pressed', String(active));
+      if (icon) {
+        icon.className = `fa-solid ${active ? 'fa-pause' : 'fa-play'} text-black text-sm ml-0.5`;
       }
     });
   });
 
   player.on('onTimeUpdate', ({ currentTime, duration, progress }) => {
     if (playerCurrentTime) playerCurrentTime.textContent = formatTime(currentTime);
-    if (playerDuration && !isNaN(duration)) playerDuration.textContent = formatTime(duration);
+    if (playerDuration && Number.isFinite(duration)) playerDuration.textContent = formatTime(duration);
     if (playerProgressBar) playerProgressBar.style.width = `${progress}%`;
     if (playerProgressSlider) playerProgressSlider.value = progress;
 
@@ -1115,6 +1114,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (currentView !== 'search') {
         navigateTo('search', query);
       } else {
+        viewHistory[historyIndex].param = query;
         renderSearch(query);
       }
     });
@@ -1132,7 +1132,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (searchInput) {
         searchInput.value = '';
         clearSearchBtn.classList.add('hidden');
-        renderSearch('');
+        navigateTo('search', '');
       }
     });
   }
@@ -1203,7 +1203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnInstallApp = document.getElementById('btn-install-app');
   if (btnInstallApp) {
     btnInstallApp.addEventListener('click', () => {
-      showToast("Descargando la aplicación de Spotify...", "fa-download");
+      window.open('https://www.spotify.com/download/', '_blank', 'noopener,noreferrer');
     });
   }
 
@@ -1229,14 +1229,21 @@ document.addEventListener('DOMContentLoaded', () => {
   function openMobileLibrary() {
     if (sidebarLeft && drawerOverlay) {
       sidebarLeft.classList.remove('hidden');
+      sidebarLeft.classList.add('drawer-open');
+      mobileLibToggle?.setAttribute('aria-expanded', 'true');
       sidebarLeft.classList.add('fixed', 'inset-y-0', 'left-0', 'z-50', 'w-80', 'max-w-[85vw]', 'rounded-none', 'shadow-2xl');
       drawerOverlay.classList.remove('hidden');
+      closeMobileLib?.focus();
     }
   }
 
   function closeMobileLibrary() {
     if (sidebarLeft && drawerOverlay) {
+      const wasOpen = sidebarLeft.classList.contains('drawer-open');
+      sidebarLeft.classList.remove('drawer-open');
       sidebarLeft.classList.add('hidden');
+      mobileLibToggle?.setAttribute('aria-expanded', 'false');
+      if (wasOpen) mobileLibToggle?.focus();
       sidebarLeft.classList.remove('fixed', 'inset-y-0', 'left-0', 'z-50', 'w-80', 'max-w-[85vw]', 'rounded-none', 'shadow-2xl');
       drawerOverlay.classList.add('hidden');
     }
@@ -1272,8 +1279,46 @@ document.addEventListener('DOMContentLoaded', () => {
     premiumModal.classList.remove('hidden');
   });
 
+  const queuePanel = document.getElementById('queue-panel');
+  function renderQueue() {
+    if (!queuePanel || !isQueueOpen) return;
+    queuePanel.innerHTML = `<div class="section-heading"><h2 class="text-xl font-bold">Cola de reproducción</h2><button id="close-queue" aria-label="Cerrar cola">✕</button></div>`;
+    player.queue.forEach((track, index) => {
+      const button = document.createElement('button');
+      button.className = 'queue-track';
+      button.textContent = `${index === player.currentIndex ? '▶ ' : ''}${track.title} · ${track.artist}`;
+      button.addEventListener('click', () => player.playTrack(track));
+      queuePanel.appendChild(button);
+    });
+    queuePanel.querySelector('#close-queue').onclick = () => {
+      isQueueOpen = false; queuePanel.hidden = true; queueToggleBtn.setAttribute('aria-expanded', 'false'); queueToggleBtn.focus();
+    };
+  }
+  queueToggleBtn?.addEventListener('click', () => {
+    isQueueOpen = !isQueueOpen; queuePanel.hidden = !isQueueOpen;
+    queueToggleBtn.setAttribute('aria-expanded', String(isQueueOpen)); renderQueue();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeMobileLibrary(); premiumModal?.classList.add('hidden');
+      lyricsModal?.classList.add('hidden'); isLyricsOpen = false;
+      userDropdown?.classList.add('hidden');
+      isQueueOpen = false; queuePanel.hidden = true;
+      queueToggleBtn?.setAttribute('aria-expanded', 'false');
+    }
+    if (event.key === 'Tab' && sidebarLeft?.classList.contains('drawer-open')) {
+      const items = [...sidebarLeft.querySelectorAll('button, [tabindex="0"]')].filter(el => el.getClientRects().length);
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    }
+  });
+  window.matchMedia('(min-width: 768px)').addEventListener('change', closeMobileLibrary);
+  player.on('onPlaybackError', () => showToast('No se pudo reproducir el audio de demostración. Prueba otra canción.', 'fa-circle-exclamation'));
   // Initial Boot
   syncPlayerUI(player.currentTrack);
+  player.setVolume(player.volume);
+  player.emit('onModeChange', { isShuffle: player.isShuffle, repeatMode: player.repeatMode });
   renderLibrary();
   renderCurrentView();
   updateNavButtons();
