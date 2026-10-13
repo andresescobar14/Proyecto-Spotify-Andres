@@ -180,14 +180,19 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="px-6 py-4">
         <!-- Top Greeting -->
         <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">${greeting}</h1>
-        
+
+        <div class="audio-toolbar">
+          <p><strong>Música real</strong><span>Vistas previas de Spotify. Importa tus audios para escuchar archivos completos.</span></p>
+          <div><button data-action="listen-spotify" class="audio-pill">Escuchar en Spotify ↗</button><button data-action="import-audio" class="audio-pill audio-pill-green">+ Importar audio</button></div>
+        </div>
+        ${data.songs.some(song => song.isLocal) ? `<section class="mb-8"><h2 class="text-xl font-bold mb-4">Tus archivos de audio</h2><div class="card-grid">${data.songs.filter(song => song.isLocal).map(renderSongCard).join('')}</div></section>` : ''}
         <!-- Top 6 Quick Cards -->
         <div class="quick-grid mb-8">
           ${quickTracks.map(song => `
             <div class="group flex items-center bg-[#282828]/60 hover:bg-[#383838] rounded-md overflow-hidden cursor-pointer transition-all duration-200 relative shadow-md"
                  data-action="play-song" data-id="${song.id}">
-              <img src="${song.cover}" alt="${song.title}" class="w-14 h-14 object-cover shrink-0" onerror="this.onerror=null;this.src='images.jpg'"/>
-              <span class="font-bold text-xs sm:text-sm px-3 truncate flex-1">${song.title}</span>
+              <img src="${song.cover}" alt="${escapeHTML(song.title)}" class="w-14 h-14 object-cover shrink-0" onerror="this.onerror=null;this.src='images.jpg'"/>
+              <span class="font-bold text-xs sm:text-sm px-3 truncate flex-1">${escapeHTML(song.title)}</span>
               <button class="w-10 h-10 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200 mr-3 hover:scale-105 shrink-0"
                       title="Reproducir">
                 <i class="fa-solid ${player.currentTrack?.id === song.id && player.isPlaying ? 'fa-pause' : 'fa-play'} text-black text-sm ml-0.5"></i>
@@ -271,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="spotify-card group bg-[#181818] p-3.5 rounded-lg hover:bg-[#282828] transition-all duration-200 cursor-pointer flex flex-col relative"
            data-action="play-song" data-id="${song.id}">
         <div class="relative w-full aspect-square mb-3.5 rounded-md overflow-hidden bg-[#282828] shadow-md">
-          <img src="${song.cover}" alt="${song.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='images.jpg'"/>
+          <img src="${song.cover}" alt="${escapeHTML(song.title)}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='images.jpg'"/>
           <button class="play-button-overlay absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 z-10"
                   title="Reproducir">
             <i class="fa-solid ${isThisPlaying ? 'fa-pause' : 'fa-play'} text-black text-sm ml-0.5"></i>
@@ -287,8 +292,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           ` : ''}
         </div>
-        <h3 class="font-bold text-sm text-white truncate mb-1 ${isThisPlaying ? 'text-[#1ed760]' : ''}">${song.title}</h3>
-        <p class="text-xs text-[#b3b3b3] truncate">${song.artist}</p>
+        <h3 class="font-bold text-sm text-white truncate mb-1 ${isThisPlaying ? 'text-[#1ed760]' : ''}">${escapeHTML(song.title)}</h3>
+        <p class="text-xs text-[#b3b3b3] truncate">${escapeHTML(song.artist)}</p><span class="audio-badge">${song.isLocal ? 'Archivo completo' : 'Vista previa · Spotify'}</span>
       </div>
     `;
   }
@@ -298,13 +303,13 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="spotify-card group bg-[#181818] p-3.5 rounded-lg hover:bg-[#282828] transition-all duration-200 cursor-pointer flex flex-col relative"
            data-action="view-artist" data-id="${artist.id}">
         <div class="relative w-full aspect-square mb-3.5 rounded-full overflow-hidden bg-[#282828] shadow-md">
-          <img src="${artist.cover}" alt="${artist.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='images (4).jpg'"/>
+          <img src="${artist.cover}" alt="${escapeHTML(artist.name)}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='images (4).jpg'"/>
           <button class="play-button-overlay absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 z-10"
                   title="Reproducir">
             <i class="fa-solid fa-play text-black text-sm ml-0.5"></i>
           </button>
         </div>
-        <h3 class="font-bold text-sm text-white truncate mb-1">${artist.name}</h3>
+        <h3 class="font-bold text-sm text-white truncate mb-1">${escapeHTML(artist.name)}</h3>
         <p class="text-xs text-[#b3b3b3]">Artista</p>
       </div>
     `;
@@ -315,14 +320,14 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="spotify-card group bg-[#181818] p-3.5 rounded-lg hover:bg-[#282828] transition-all duration-200 cursor-pointer flex flex-col relative"
            data-action="view-album" data-id="${album.id}">
         <div class="relative w-full aspect-square mb-3.5 rounded-md overflow-hidden bg-[#282828] shadow-md">
-          <img src="${album.cover}" alt="${album.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='img9.jpg'"/>
+          <img src="${album.cover}" alt="${escapeHTML(album.title)}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='img9.jpg'"/>
           <button class="play-button-overlay absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 z-10"
                   title="Reproducir">
             <i class="fa-solid fa-play text-black text-sm ml-0.5"></i>
           </button>
         </div>
-        <h3 class="font-bold text-sm text-white truncate mb-1">${album.title}</h3>
-        <p class="text-xs text-[#b3b3b3] truncate">${album.artist} • ${album.year}</p>
+        <h3 class="font-bold text-sm text-white truncate mb-1">${escapeHTML(album.title)}</h3>
+        <p class="text-xs text-[#b3b3b3] truncate">${escapeHTML(album.artist)} • ${album.year}</p>
       </div>
     `;
   }
@@ -349,14 +354,14 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="spotify-card group bg-[#181818] p-3.5 rounded-lg hover:bg-[#282828] transition-all duration-200 cursor-pointer flex flex-col relative"
            data-action="view-playlist" data-id="${playlist.id}">
         <div class="relative w-full aspect-square mb-3.5 rounded-md overflow-hidden bg-[#282828] shadow-md">
-          <img src="${playlist.cover}" alt="${playlist.title}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='images (1).jpg'"/>
+          <img src="${playlist.cover}" alt="${escapeHTML(playlist.title)}" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='images (1).jpg'"/>
           <button class="play-button-overlay absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] flex items-center justify-center shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-105 z-10"
                   title="Reproducir">
             <i class="fa-solid fa-play text-black text-sm ml-0.5"></i>
           </button>
         </div>
-        <h3 class="font-bold text-sm text-white truncate mb-1">${playlist.title}</h3>
-        <p class="text-xs text-[#b3b3b3] line-clamp-2">${playlist.description}</p>
+        <h3 class="font-bold text-sm text-white truncate mb-1">${escapeHTML(playlist.title)}</h3>
+        <p class="text-xs text-[#b3b3b3] line-clamp-2">${escapeHTML(playlist.description)}</p>
       </div>
     `;
   }
@@ -375,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="group relative ${cat.color} rounded-lg h-36 md:h-44 p-4 overflow-hidden cursor-pointer shadow-lg hover:scale-[1.02] transition-transform duration-200"
                    data-action="filter-category" data-category="${cat.title}">
                 <h3 class="text-lg md:text-xl font-bold text-white break-words w-2/3 leading-tight">${cat.title}</h3>
-                <img src="${cat.cover}" alt="${cat.title}" 
+                <img src="${cat.cover}" alt="${cat.title}"
                      class="absolute -bottom-2 -right-4 w-20 md:w-24 h-20 md:h-24 object-cover shadow-2xl rounded-md rotate-[25deg] group-hover:rotate-[20deg] group-hover:scale-105 transition-all duration-300"
                      onerror="this.onerror=null;this.src='images.jpg'"/>
               </div>
@@ -433,18 +438,18 @@ document.addEventListener('DOMContentLoaded', () => {
                          data-action="play-song" data-id="${song.id}">
                       <div class="flex items-center gap-3 min-w-0">
                         <div class="relative w-10 h-10 shrink-0">
-                          <img src="${song.cover}" alt="${song.title}" class="w-10 h-10 rounded object-cover" onerror="this.onerror=null;this.src='images.jpg'"/>
+                          <img src="${song.cover}" alt="${escapeHTML(song.title)}" class="w-10 h-10 rounded object-cover" onerror="this.onerror=null;this.src='images.jpg'"/>
                           <button class="absolute inset-0 bg-black/50 rounded flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                             <i class="fa-solid fa-play text-white text-xs"></i>
                           </button>
                         </div>
                         <div class="min-w-0">
-                          <h4 class="font-semibold text-sm text-white truncate">${song.title}</h4>
-                          <p class="text-xs text-[#b3b3b3] truncate">${song.artist}</p>
+                          <h4 class="font-semibold text-sm text-white truncate">${escapeHTML(song.title)}</h4>
+                          <p class="text-xs text-[#b3b3b3] truncate">${escapeHTML(song.artist)}</p><span class="audio-badge">${song.isLocal ? 'Archivo completo' : 'Vista previa · Spotify'}</span>
                         </div>
                       </div>
                       <div class="flex items-center gap-4 text-xs text-[#b3b3b3]">
-                        <button class="opacity-0 group-hover:opacity-100 hover:text-white transition-opacity ${song.isLiked ? 'text-[#1ed760] opacity-100' : ''}" 
+                        <button class="opacity-0 group-hover:opacity-100 hover:text-white transition-opacity ${song.isLiked ? 'text-[#1ed760] opacity-100' : ''}"
                                 data-action="toggle-like" data-id="${song.id}">
                           <i class="fa-${song.isLiked ? 'solid' : 'regular'} fa-heart"></i>
                         </button>
@@ -499,15 +504,15 @@ document.addEventListener('DOMContentLoaded', () => {
       <div>
         <!-- Hero Header -->
         <div class="flex flex-col md:flex-row items-end gap-6 p-6 pb-6 bg-gradient-to-b ${playlist.gradient || 'from-[#503750] to-[#121212]'} pt-12 md:pt-16 shadow-2xl">
-          <img src="${playlist.cover}" alt="${playlist.title}" 
-               class="w-48 h-48 md:w-56 md:h-56 object-cover rounded-md shadow-2xl shrink-0" 
+          <img src="${playlist.cover}" alt="${escapeHTML(playlist.title)}"
+               class="w-48 h-48 md:w-56 md:h-56 object-cover rounded-md shadow-2xl shrink-0"
                onerror="this.onerror=null;this.src='images (1).jpg'"/>
           <div class="flex flex-col gap-2 min-w-0">
             <span class="text-xs uppercase font-extrabold tracking-wider">Playlist pública</span>
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">${playlist.title}</h1>
-            <p class="text-xs md:text-sm text-gray-300 line-clamp-2">${playlist.description}</p>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">${escapeHTML(playlist.title)}</h1>
+            <p class="text-xs md:text-sm text-gray-300 line-clamp-2">${escapeHTML(playlist.description)}</p>
             <div class="flex items-center gap-2 text-xs font-semibold text-white mt-2 flex-wrap">
-              <span class="font-bold hover:underline cursor-pointer">${playlist.owner}</span>
+              <span class="font-bold hover:underline cursor-pointer">${escapeHTML(playlist.owner)}</span>
               <span>•</span>
               <span>${playlistSongs.length} canciones</span>
               <span>•</span>
@@ -560,17 +565,17 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <!-- Title & Cover -->
                   <div class="flex items-center gap-3 min-w-0">
-                    <img src="${song.cover}" alt="${song.title}" class="w-10 h-10 object-cover rounded shrink-0 shadow" onerror="this.onerror=null;this.src='images.jpg'"/>
+                    <img src="${song.cover}" alt="${escapeHTML(song.title)}" class="w-10 h-10 object-cover rounded shrink-0 shadow" onerror="this.onerror=null;this.src='images.jpg'"/>
                     <div class="min-w-0">
-                      <div class="font-semibold text-white truncate hover:underline ${isPlaying ? 'text-[#1ed760]' : ''}">${song.title}</div>
-                      <div class="text-xs text-[#b3b3b3] truncate hover:text-white">${song.artist}</div>
+                      <div class="font-semibold text-white truncate hover:underline ${isPlaying ? 'text-[#1ed760]' : ''}">${escapeHTML(song.title)}</div>
+                      <div class="text-xs text-[#b3b3b3] truncate hover:text-white">${escapeHTML(song.artist)}</div>
                     </div>
                   </div>
                   <!-- Album -->
-                  <div class="hidden md:block truncate text-xs hover:text-white">${song.album}</div>
+                  <div class="hidden md:block truncate text-xs hover:text-white">${escapeHTML(song.album)}</div>
                   <!-- Duration & Like -->
                   <div class="flex items-center justify-end gap-3 md:gap-4 text-xs pr-2 md:pr-4">
-                    <button class="opacity-0 group-hover:opacity-100 hover:text-white transition-opacity ${song.isLiked ? 'text-[#1ed760] opacity-100' : ''}" 
+                    <button class="opacity-0 group-hover:opacity-100 hover:text-white transition-opacity ${song.isLiked ? 'text-[#1ed760] opacity-100' : ''}"
                             data-action="toggle-like" data-id="${song.id}" title="Me gusta">
                       <i class="fa-${song.isLiked ? 'solid' : 'regular'} fa-heart text-sm"></i>
                     </button>
@@ -606,7 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <i class="fa-solid fa-circle-check text-[#3d91f4]"></i>
               <span>Artista verificado</span>
             </div>
-            <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight mb-3">${artist.name}</h1>
+            <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight mb-3">${escapeHTML(artist.name)}</h1>
             <p class="text-sm font-semibold text-gray-200">${artist.monthlyListeners}</p>
           </div>
         </div>
@@ -634,12 +639,12 @@ document.addEventListener('DOMContentLoaded', () => {
                    data-action="play-song" data-id="${song.id}">
                 <div class="flex items-center gap-4 min-w-0">
                   <span class="w-4 text-center font-bold text-xs">${idx + 1}</span>
-                  <img src="${song.cover}" alt="${song.title}" class="w-10 h-10 object-cover rounded shrink-0 shadow" onerror="this.onerror=null;this.src='images.jpg'"/>
-                  <span class="font-bold text-white truncate hover:underline">${song.title}</span>
+                  <img src="${song.cover}" alt="${escapeHTML(song.title)}" class="w-10 h-10 object-cover rounded shrink-0 shadow" onerror="this.onerror=null;this.src='images.jpg'"/>
+                  <span class="font-bold text-white truncate hover:underline">${escapeHTML(song.title)}</span>
                 </div>
                 <div class="text-xs text-[#b3b3b3] hidden sm:block">${song.plays}</div>
                 <div class="flex items-center gap-4 text-xs">
-                  <button class="opacity-0 group-hover:opacity-100 hover:text-white transition-opacity ${song.isLiked ? 'text-[#1ed760] opacity-100' : ''}" 
+                  <button class="opacity-0 group-hover:opacity-100 hover:text-white transition-opacity ${song.isLiked ? 'text-[#1ed760] opacity-100' : ''}"
                           data-action="toggle-like" data-id="${song.id}">
                     <i class="fa-${song.isLiked ? 'solid' : 'regular'} fa-heart"></i>
                   </button>
@@ -655,7 +660,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <h2 class="text-2xl font-bold mb-4">Información</h2>
           <div class="bg-[#282828] p-6 rounded-xl max-w-2xl border border-white/5">
             <h3 class="text-lg font-bold mb-2">${artist.monthlyListeners}</h3>
-            <p class="text-sm text-[#b3b3b3] leading-relaxed mb-4">${artist.bio}</p>
+            <p class="text-sm text-[#b3b3b3] leading-relaxed mb-4">${escapeHTML(artist.bio)}</p>
           </div>
         </div>
 
@@ -677,12 +682,12 @@ document.addEventListener('DOMContentLoaded', () => {
       <div>
         <!-- Hero Header -->
         <div class="flex flex-col md:flex-row items-end gap-6 p-6 pb-6 bg-gradient-to-b from-[#405060] to-[#121212] pt-12 md:pt-16 shadow-2xl">
-          <img src="${album.cover}" alt="${album.title}" class="w-48 h-48 md:w-56 md:h-56 object-cover rounded-md shadow-2xl shrink-0" onerror="this.onerror=null;this.src='img9.jpg'"/>
+          <img src="${album.cover}" alt="${escapeHTML(album.title)}" class="w-48 h-48 md:w-56 md:h-56 object-cover rounded-md shadow-2xl shrink-0" onerror="this.onerror=null;this.src='img9.jpg'"/>
           <div class="flex flex-col gap-2 min-w-0">
             <span class="text-xs uppercase font-extrabold tracking-wider">Álbum</span>
-            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">${album.title}</h1>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">${escapeHTML(album.title)}</h1>
             <div class="flex items-center gap-2 text-xs font-semibold text-white mt-2">
-              <span class="font-bold hover:underline cursor-pointer">${album.artist}</span>
+              <span class="font-bold hover:underline cursor-pointer">${escapeHTML(album.artist)}</span>
               <span>•</span>
               <span>${album.year}</span>
               <span>•</span>
@@ -709,10 +714,10 @@ document.addEventListener('DOMContentLoaded', () => {
                  data-action="play-song" data-id="${song.id}">
               <div class="flex items-center gap-4 min-w-0">
                 <span class="w-4 text-center font-bold text-xs">${idx + 1}</span>
-                <span class="font-bold text-white truncate hover:underline">${song.title}</span>
+                <span class="font-bold text-white truncate hover:underline">${escapeHTML(song.title)}</span>
               </div>
               <div class="flex items-center gap-4 text-xs">
-                <button class="opacity-0 group-hover:opacity-100 hover:text-white transition-opacity ${song.isLiked ? 'text-[#1ed760] opacity-100' : ''}" 
+                <button class="opacity-0 group-hover:opacity-100 hover:text-white transition-opacity ${song.isLiked ? 'text-[#1ed760] opacity-100' : ''}"
                         data-action="toggle-like" data-id="${song.id}">
                   <i class="fa-${song.isLiked ? 'solid' : 'regular'} fa-heart"></i>
                 </button>
@@ -848,14 +853,14 @@ document.addEventListener('DOMContentLoaded', () => {
     libraryListContainer.innerHTML = items.map(item => `
       <div class="flex items-center gap-3 p-2 rounded-md hover:bg-[#282828] transition-colors cursor-pointer group"
            data-action="view-${item.type}" data-id="${item.id}">
-        <img src="${item.cover}" alt="${item.title}" 
+        <img src="${item.cover}" alt="${escapeHTML(item.title)}"
              class="w-12 h-12 object-cover shrink-0 ${item.isRound ? 'rounded-full' : 'rounded-md'} shadow"
              onerror="this.onerror=null;this.src='images (1).jpg'"/>
         <div class="flex flex-col min-w-0 flex-1">
-          <h3 class="text-sm font-semibold text-white truncate group-hover:text-[#1ed760] transition-colors">${item.title}</h3>
+          <h3 class="text-sm font-semibold text-white truncate group-hover:text-[#1ed760] transition-colors">${escapeHTML(item.title)}</h3>
           <div class="flex items-center gap-1.5 text-xs text-[#b3b3b3] truncate">
             ${item.pinned ? '<i class="fa-solid fa-thumbtack text-[#1ed760] text-[10px] rotate-45"></i>' : ''}
-            <span>${item.subtitle}</span>
+            <span>${escapeHTML(item.subtitle)}</span>
           </div>
         </div>
       </div>
@@ -920,7 +925,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!element || !event.currentTarget.contains(element)) return;
     const action = element.dataset.action;
     const id = element.dataset.id;
-    if (action.startsWith('view-')) {
+    if (action === 'listen-spotify') {
+      openSpotifyPanel(player.currentTrack);
+    } else if (action === 'import-audio') {
+      document.getElementById('local-audio-input').click();
+    } else if (action.startsWith('view-')) {
       closeMobileLibrary();
       navigateTo(action.slice(5), id);
     } else if (action === 'play-song') {
@@ -962,16 +971,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (playerCover) playerCover.src = track.cover;
     if (playerTitle) playerTitle.textContent = track.title;
     if (playerArtist) playerArtist.textContent = track.artist;
-    
+
+    const notice = document.getElementById('demo-notice');
+    if (notice) notice.textContent = track.isLocal ? 'Audio local · Archivo completo' : 'Spotify · Vista previa';
+    playerCover?.setAttribute('alt', `Portada de ${track.title}`);
     // Like button
     if (playerLikeIcon) {
       playerLikeIcon.className = `fa-${track.isLiked ? 'solid' : 'regular'} fa-heart`;
       playerLikeBtn?.classList.toggle('text-[#1ed760]', track.isLiked);
     }
 
-    if (playerDuration) {
-      playerDuration.textContent = track.durationFormatted;
-    }
+    if (playerDuration) playerDuration.textContent = formatTime(track.isLocal ? track.duration : track.previewDuration || 30);
 
     // Update synced lyrics modal if open
     updateLyricsDisplay(track);
@@ -979,21 +989,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateLyricsDisplay(track) {
     if (!lyricsContent || !track) return;
-    if (!track.lyrics || track.lyrics.length === 0) {
-      lyricsContent.innerHTML = `<p class="text-gray-400 text-lg">No hay letras disponibles para esta canción.</p>`;
-      return;
+    lyricsContent.innerHTML = `<p class="text-gray-300 text-lg">${track.isLocal ? 'Este archivo no incluye letras.' : 'Las letras de esta canción se consultan en Spotify.'}</p>`;
+    if (track.spotifyUrl) {
+      const link = document.createElement('a');
+      link.href = track.spotifyUrl; link.target = '_blank'; link.rel = 'noopener noreferrer';
+      link.className = 'audio-pill audio-pill-green'; link.textContent = 'Abrir canción en Spotify ↗';
+      lyricsContent.appendChild(link);
     }
-
-    lyricsContent.innerHTML = track.lyrics.map((line, index) => `
-      <p class="lyric-line text-2xl md:text-3xl font-bold text-white/40 my-4 hover:text-white cursor-pointer transition-all duration-200 ${index === 0 ? 'active' : ''}"
-         data-line="${index}">
-        ${line}
-      </p>
-    `).join('');
   }
 
   // Hook into SpotifyPlayer events
   player.on('onTrackChange', (track) => {
+    closeSpotifyPanel();
     syncPlayerUI(track);
     const scroll = mainScrollContainer.scrollTop;
     renderCurrentView();
@@ -1068,7 +1075,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Bottom Player Buttons Listeners
-  if (playerPlayBtn) playerPlayBtn.addEventListener('click', () => player.togglePlay());
+  if (playerPlayBtn) playerPlayBtn.addEventListener('click', () => { closeSpotifyPanel(); player.togglePlay(); });
   if (playerNextBtn) playerNextBtn.addEventListener('click', () => player.next());
   if (playerPrevBtn) playerPrevBtn.addEventListener('click', () => player.prev());
   if (playerShuffleBtn) playerShuffleBtn.addEventListener('click', () => player.toggleShuffle());
@@ -1157,7 +1164,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       chip.classList.remove('bg-[#282828]', 'text-white');
       chip.classList.add('bg-white', 'text-black');
-      
+
       activeLibraryFilter = chip.getAttribute('data-library-filter');
       renderLibrary();
     });
@@ -1300,7 +1307,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
-      closeMobileLibrary(); premiumModal?.classList.add('hidden');
+      closeMobileLibrary(); closeSpotifyPanel(); premiumModal?.classList.add('hidden');
       lyricsModal?.classList.add('hidden'); isLyricsOpen = false;
       userDropdown?.classList.add('hidden');
       isQueueOpen = false; queuePanel.hidden = true;
@@ -1314,7 +1321,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   window.matchMedia('(min-width: 768px)').addEventListener('change', closeMobileLibrary);
-  player.on('onPlaybackError', () => showToast('No se pudo reproducir el audio de demostración. Prueba otra canción.', 'fa-circle-exclamation'));
+  player.on('onPlaybackError', track => showToast(track?.isLocal ? 'No se puede reproducir este formato de audio. Prueba MP3 o WAV.' : 'La vista previa no está disponible. Usa Escuchar en Spotify.', 'fa-circle-exclamation'));
+  const spotifyPanel = document.getElementById('spotify-listen-panel');
+  const embedContainer = document.getElementById('spotify-embed-container');
+  let spotifyOpener = null;
+  function closeSpotifyPanel() {
+    if (!spotifyPanel) return;
+    spotifyPanel.hidden = true;
+    embedContainer.replaceChildren(); // Stops the provider before native playback can resume.
+  }
+  function openSpotifyPanel(track) {
+    if (!track?.spotifyId) return showToast('Este archivo es local. Usa el reproductor de la página.', 'fa-music');
+    player.pause();
+    spotifyOpener = document.activeElement;
+    embedContainer.replaceChildren();
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://open.spotify.com/embed/track/${track.spotifyId}?utm_source=generator&theme=0`;
+    iframe.title = `Spotify: ${track.title} — ${track.artist}`;
+    iframe.width = '100%'; iframe.height = '152';
+    iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+    iframe.setAttribute('allowfullscreen', '');
+    embedContainer.appendChild(iframe);
+    document.getElementById('spotify-external-link').href = track.spotifyUrl;
+    spotifyPanel.hidden = false;
+    document.getElementById('close-spotify-panel').focus();
+  }
+  document.getElementById('close-spotify-panel').addEventListener('click', () => {
+    closeSpotifyPanel(); if (spotifyOpener?.isConnected) spotifyOpener.focus();
+  });
+  player.on('onBeforePlay', closeSpotifyPanel);
+  document.getElementById('btn-toggle-info')?.addEventListener('click', () => openSpotifyPanel(player.currentTrack));
+  const localAudioUrls = new Set();
+  const localAudioInput = document.getElementById('local-audio-input');
+  localAudioInput.addEventListener('change', () => {
+    const tracks = [];
+    for (const file of localAudioInput.files) {
+      if (!file.type.startsWith('audio/') && !/\.(mp3|wav|ogg|m4a|flac)$/i.test(file.name)) continue;
+      const url = URL.createObjectURL(file); localAudioUrls.add(url);
+      const song = { id: `local-${crypto.randomUUID()}`, title: file.name.replace(/\.[^.]+$/, ''),
+        artist: 'Tu archivo de audio', album: 'Archivos locales', artistId: '', albumId: '',
+        duration: 0, durationFormatted: '—', cover: 'assets/covers/placeholder.svg', audioUrl: url,
+        isLiked: false, isLocal: true, genre: 'Audio local', plays: '—', lyrics: [] };
+      data.songs.push(song); tracks.push(song);
+    }
+    localAudioInput.value = '';
+    if (!tracks.length) return showToast('Selecciona archivos de audio, como MP3 o WAV.', 'fa-music');
+    navigateTo('home'); renderHome();
+    player.playTrack(tracks[0], tracks);
+    showToast(`${tracks.length} archivo(s) añadidos. Permanecen disponibles mientras esta página esté abierta.`, 'fa-music');
+  });
+  window.addEventListener('pagehide', event => {
+    if (!event.persisted) localAudioUrls.forEach(url => URL.revokeObjectURL(url));
+  });
   // Initial Boot
   syncPlayerUI(player.currentTrack);
   player.setVolume(player.volume);

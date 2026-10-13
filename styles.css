@@ -326,3 +326,28 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible, input:focu
 }
 
 .spotify-card.is-playing h3 { color: #1ed760; }
+
+/* Real music and local files. */
+.audio-toolbar { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px; margin-bottom:24px; background:linear-gradient(100deg,#183a2b,#181818); border:1px solid #ffffff12; border-radius:12px; }
+.audio-toolbar p strong,.audio-toolbar p span { display:block; }
+.audio-toolbar p strong { font-size:14px; margin-bottom:4px; }
+.audio-toolbar p span { font-size:12px; color:#b3b3b3; }
+.audio-toolbar > div { display:flex; gap:8px; flex-shrink:0; }
+.audio-pill { display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:24px; background:#282828; color:white; font-size:12px; font-weight:700; }
+.audio-pill:hover { background:#383838; }
+.audio-pill-green { background:#1ed760; color:black; }
+.audio-pill-green:hover { background:#1fdf64; }
+.audio-badge { color:#8ecda5; font-size:10px; margin-top:8px; }
+#spotify-listen-panel { position:fixed; z-index:45; bottom:104px; right:12px; width:min(480px,calc(100vw - 24px)); padding:20px; background:#181818; border:1px solid #383838; border-radius:16px; box-shadow:0 10px 50px #0009; }
+#spotify-listen-panel[hidden] { display:none; }
+#spotify-listen-panel h2 { font-size:18px; font-weight:700; }
+#spotify-listen-panel p { color:#b3b3b3; font-size:12px; margin-bottom:12px; }
+#spotify-listen-panel iframe { border:0; border-radius:12px; }
+#spotify-external-link { display:inline-block; font-size:12px; color:#1ed760; margin-top:12px; }
+@media(max-width:1100px) { .audio-toolbar { align-items:flex-start; flex-direction:column; } }
+@media(max-width:767px) {
+  .audio-toolbar { padding:12px; }
+  .audio-toolbar > div { width:100%; }
+  .audio-toolbar .audio-pill { flex:1; font-size:11px; padding:10px; }
+  #spotify-listen-panel { bottom:calc(152px + env(safe-area-inset-bottom)); max-height:55dvh; overflow:auto; padding:16px; }
+}

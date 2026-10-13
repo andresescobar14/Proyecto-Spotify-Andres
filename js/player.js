@@ -1,4 +1,4 @@
-/** Audio demo player. Metadata is illustrative; audio sources are demo recordings. */
+/** Native playback for official Spotify previews and user-selected audio files. */
 class SpotifyPlayer {
   constructor() {
     this.audio = new Audio();
@@ -49,14 +49,16 @@ class SpotifyPlayer {
     this.currentIndex = this.queue.findIndex(item => item.id === track.id);
     if (this.currentIndex < 0) { this.queue.unshift(track); this.currentIndex = 0; }
     this.currentTrack = track;
-    this.audio.src = track.audioUrl;
+    this.audio.src = track.audioUrl || '';
     this.emit('onTrackChange', track);
     this.emit('onQueueChange', this.queue);
     this.emitTime();
     this.play();
   }
   async play() {
+    this.emit('onBeforePlay', this.currentTrack);
     if (!this.currentTrack) return;
+    if (!this.currentTrack.audioUrl) { this.emit('onPlaybackError', this.currentTrack); return; }
     if (!this.audio.getAttribute('src')) this.audio.src = this.currentTrack.audioUrl;
     const request = ++this.requestId;
     try {
@@ -98,7 +100,7 @@ class SpotifyPlayer {
   seekRelative(delta) { this.seek(this.getCurrentTime() + delta); }
   seekPercent(percent) { this.seek(percent / 100 * this.getDuration()); }
   getCurrentTime() { return this.audio.currentTime || 0; }
-  getDuration() { return Number.isFinite(this.audio.duration) && this.audio.duration > 0 ? this.audio.duration : this.currentTrack?.duration || 0; }
+  getDuration() { return Number.isFinite(this.audio.duration) && this.audio.duration > 0 ? this.audio.duration : (this.currentTrack?.isLocal ? this.currentTrack.duration : this.currentTrack?.previewDuration || 30); }
   setVolume(value) {
     if (!Number.isFinite(value)) return;
     this.volume = Math.max(0, Math.min(1, value));
@@ -119,7 +121,7 @@ class SpotifyPlayer {
     const liked = SPOTIFY_DATA.songs.filter(item => item.isLiked).map(item => item.id);
     const playlist = SPOTIFY_DATA.playlists.find(item => item.id === 'playlist-liked');
     if (playlist) playlist.trackIds = liked;
-    window.spotifyStorage.write('spotify_likes', liked);
+    window.spotifyStorage.write('spotify_likes', liked.filter(songId => !songId.startsWith('local-')));
     return song.isLiked;
   }
 }

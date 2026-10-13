@@ -67,3 +67,40 @@ test('late play promise cannot restart a paused player', async () => {
   const pending = player.play(); player.pause(); resolve(); await pending;
   assert.equal(player.isPlaying, false);
 });
+
+test('catalog audio matches official Spotify IDs and contains no demo recordings or fake lyrics', () => {
+  const { data } = setup();
+  assert.equal(data.songs.length, 17);
+  const sources = new Set();
+  for (const song of data.songs) {
+    assert.match(song.spotifyId, /^[A-Za-z0-9]{22}$/);
+    assert.equal(song.spotifyUrl, `https://open.spotify.com/track/${song.spotifyId}`);
+    assert.match(song.audioUrl, /^https:\/\/p\.scdn\.co\/mp3-preview\/[a-f0-9]+$/);
+    assert.equal(song.previewDuration, 30);
+    assert.equal(song.lyrics.length, 0);
+    sources.add(song.audioUrl);
+  }
+  assert.equal(sources.size, 17);
+});
+test('preview duration uses the clip before metadata and then the decoded media duration', () => {
+  const { player } = setup();
+  assert.equal(player.getDuration(), 30);
+  player.audio.duration = 29.8;
+  assert.equal(player.getDuration(), 29.8);
+});
+test('missing audio reports an error and never starts a different recording', async () => {
+  const { player } = setup();
+  let failed;
+  player.currentTrack = { id: 'missing', audioUrl: '' };
+  player.on('onPlaybackError', track => { failed = track.id; });
+  await player.play();
+  assert.equal(failed, 'missing');
+  assert.equal(player.isPlaying, false);
+});
+test('local playback notifies the interface before starting to stop an embedded player', async () => {
+  const { player } = setup();
+  let notified = false;
+  player.on('onBeforePlay', () => { notified = true; });
+  player.audio.play = () => { assert.equal(notified, true); return Promise.resolve(); };
+  await player.play();
+});
