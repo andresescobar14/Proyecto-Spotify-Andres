@@ -15,7 +15,7 @@ class SpotifyPlayer {
     this.isPlaying = false;
     this.isShuffle = false;
     this.repeatMode = 'all'; // 'off' | 'all' | 'one'
-    this.volume = parseFloat(localStorage.getItem('spotify_volume') || '0.75');
+    this.volume = this.loadSavedVolume();
     this.isMuted = false;
     this.previousVolume = this.volume;
 
@@ -41,6 +41,17 @@ class SpotifyPlayer {
     // Initial default track (first trending song)
     if (SPOTIFY_DATA.songs.length > 0) {
       this.currentTrack = SPOTIFY_DATA.songs[0];
+    }
+  }
+
+  loadSavedVolume() {
+    try {
+      const stored = localStorage.getItem('spotify_volume');
+      if (stored === null) return 0.75;
+      const value = Number(stored);
+      return Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0.75;
+    } catch {
+      return 0.75;
     }
   }
 
@@ -291,7 +302,9 @@ class SpotifyPlayer {
   }
 
   setVolume(fraction) {
-    this.volume = Math.max(0, Math.min(1, fraction));
+    const numericVolume = Number(fraction);
+    if (!Number.isFinite(numericVolume)) return;
+    this.volume = Math.max(0, Math.min(1, numericVolume));
     this.audio.volume = this.volume;
     if (this.volume > 0) {
       this.isMuted = false;
@@ -299,7 +312,11 @@ class SpotifyPlayer {
     } else {
       this.isMuted = true;
     }
-    localStorage.setItem('spotify_volume', this.volume.toString());
+    try {
+      localStorage.setItem('spotify_volume', this.volume.toString());
+    } catch {
+      // Playback should continue even when browser storage is unavailable.
+    }
     this.emit('onVolumeChange', { volume: this.volume, isMuted: this.isMuted });
   }
 
