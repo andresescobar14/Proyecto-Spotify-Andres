@@ -1,0 +1,11 @@
+{
+  "name": "proyecto-spotify-andres",
+  "version": "1.1.0",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i assets/tailwind.css -o assets/utilities.css --minify",
+    "check": "node --check js/data.js && node --check js/player.js && node --check js/app.js",
+    "test": "node --test tests/player.test.cjs"
+  },
+  "devDependencies": { "tailwindcss": "3.4.17" }
+}

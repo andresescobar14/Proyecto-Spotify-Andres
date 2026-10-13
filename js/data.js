@@ -25,7 +25,7 @@ const SPOTIFY_DATA = {
       albumId: "album-eternal",
       duration: 198,
       durationFormatted: "3:18",
-      cover: "https://i.scdn.co/image/ab67616d00001e02c2764fc6feb1a7d37cf3cc90",
+      cover: "assets/covers/6c391e8f2783e1f8.jpg",
       audioUrl: "https://actions.google.com/sounds/v1/water/rain_heavy.ogg", // High quality fallback audio streams
       isLiked: true,
       genre: "Pop",
@@ -50,7 +50,7 @@ const SPOTIFY_DATA = {
       albumId: "album-msb",
       duration: 184,
       durationFormatted: "3:04",
-      cover: "https://i.scdn.co/image/ab67616d00001e02a28f412a17d863410ff9cfbf",
+      cover: "assets/covers/6037ee3917d9576d.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
       isLiked: true,
       genre: "Urbano Latino",
@@ -75,7 +75,7 @@ const SPOTIFY_DATA = {
       albumId: "album-buenas",
       duration: 165,
       durationFormatted: "2:45",
-      cover: "https://i.scdn.co/image/ab67616d00001e029e3ee23e56d1e6ff08a9640e",
+      cover: "assets/covers/5e832f5f6f37a034.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
       isLiked: false,
       genre: "Urbano",
@@ -98,7 +98,7 @@ const SPOTIFY_DATA = {
       albumId: "album-sis",
       duration: 172,
       durationFormatted: "2:52",
-      cover: "https://i.scdn.co/image/ab67616d00001e0268d2c30541264c994aa9bcd5",
+      cover: "assets/covers/0307c583a88e4673.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
       isLiked: false,
       genre: "Pop Global",
@@ -121,7 +121,7 @@ const SPOTIFY_DATA = {
       albumId: "album-laciudad",
       duration: 195,
       durationFormatted: "3:15",
-      cover: "https://i.scdn.co/image/ab67616d00001e029e8d48f27391ce383862b8e8",
+      cover: "assets/covers/29d7462576265095.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
       isLiked: true,
       genre: "R&B Latino",
@@ -144,7 +144,7 @@ const SPOTIFY_DATA = {
       albumId: "album-alpha",
       duration: 180,
       durationFormatted: "3:00",
-      cover: "https://i.scdn.co/image/ab67616d00001e02bed3161d2cb88d1f959bd88f",
+      cover: "assets/covers/4140f690674bdb6f.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
       isLiked: false,
       genre: "Pop / Electro",
@@ -167,7 +167,7 @@ const SPOTIFY_DATA = {
       albumId: "album-kapo",
       duration: 174,
       durationFormatted: "2:54",
-      cover: "https://i.scdn.co/image/ab67616d00001e02e9c382b5b9b3221428da47c2",
+      cover: "assets/covers/2512fb3da12115c8.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
       isLiked: true,
       genre: "Afrobeat / Latino",
@@ -190,7 +190,7 @@ const SPOTIFY_DATA = {
       albumId: "album-msb",
       duration: 188,
       durationFormatted: "3:08",
-      cover: "https://i.scdn.co/image/ab67616d00001e02381cc0b011b48e26351d8db9",
+      cover: "assets/covers/4ae9c054db8a3274.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
       isLiked: true,
       genre: "Reggaeton",
@@ -213,7 +213,7 @@ const SPOTIFY_DATA = {
       albumId: "album-muse",
       duration: 170,
       durationFormatted: "2:50",
-      cover: "https://i.scdn.co/image/ab67616d00001e02f13afd0b8f47801b5a12e0ab",
+      cover: "assets/covers/c4da12bac925d710.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
       isLiked: false,
       genre: "K-Pop / R&B",
@@ -236,7 +236,7 @@ const SPOTIFY_DATA = {
       albumId: "album-tamalo",
       duration: 215,
       durationFormatted: "3:35",
-      cover: "https://i.scdn.co/image/ab67616d00001e0287874df3a4339798f01cae2e",
+      cover: "assets/covers/c4e5ed88462c4d91.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
       isLiked: true,
       genre: "Vallenato",
@@ -283,7 +283,7 @@ const SPOTIFY_DATA = {
       albumId: "album-nslqvapm",
       duration: 182,
       durationFormatted: "3:02",
-      cover: "https://i.scdn.co/image/ab67616d00001e02bbd45c8d36e0e045ef640411",
+      cover: "assets/covers/64bc343e70c8edc7.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
       isLiked: true,
       genre: "Trap Latino",
@@ -306,7 +306,7 @@ const SPOTIFY_DATA = {
       albumId: "album-borondo",
       duration: 178,
       durationFormatted: "2:58",
-      cover: "https://i.scdn.co/image/ab67616d00001e022feb67a486bcf117e7fb15b0",
+      cover: "assets/covers/9c838c96a460bad5.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
       isLiked: false,
       genre: "Afrobeat / Caribe",
@@ -327,7 +327,7 @@ const SPOTIFY_DATA = {
       albumId: "album-estrella",
       duration: 191,
       durationFormatted: "3:11",
-      cover: "https://i.scdn.co/image/ab67616d00001e024cbf1f88953e2f87db81f9bd",
+      cover: "assets/covers/2d305d67d0761329.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
       isLiked: true,
       genre: "Reggaeton Melódico",
@@ -348,7 +348,7 @@ const SPOTIFY_DATA = {
       albumId: "album-uvst",
       duration: 178,
       durationFormatted: "2:58",
-      cover: "https://i.scdn.co/image/ab67616d00001e0249d694203245f241a1bcaa72",
+      cover: "assets/covers/e3a9b0ac4c53bbfb.jpg",
       audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
       isLiked: true,
       genre: "Reggaeton",
@@ -411,8 +411,8 @@ const SPOTIFY_DATA = {
       name: "KAROL G",
       monthlyListeners: "54,829,102 oyentes mensuales",
       verified: true,
-      cover: "https://i.scdn.co/image/ab6761610000517466041ce9eb4497057cbc3496",
-      banner: "https://i.scdn.co/image/ab6761610000517466041ce9eb4497057cbc3496",
+      cover: "assets/covers/659024b1fc2a68ae.jpg",
+      banner: "assets/covers/659024b1fc2a68ae.jpg",
       bio: "Carolina Giraldo Navarro, conocida mundialmente como KAROL G o 'La Bichota', es una cantautora colombiana ganadora de múltiples premios Grammy y Latin Grammy.",
       topSongIds: ["song-2", "song-8"]
     },
@@ -421,8 +421,8 @@ const SPOTIFY_DATA = {
       name: "Rauw Alejandro",
       monthlyListeners: "48,190,450 oyentes mensuales",
       verified: true,
-      cover: "https://i.scdn.co/image/ab676161000051746d72db3fd29576caa9cb821f",
-      banner: "https://i.scdn.co/image/ab676161000051746d72db3fd29576caa9cb821f",
+      cover: "assets/covers/197203662fb3d139.jpg",
+      banner: "assets/covers/197203662fb3d139.jpg",
       bio: "Raúl Alejandro Ocasio Ruiz es un cantante, compositor y bailarín puertorriqueño, pionero en fusionar R&B, reggaetón y sonidos synth-pop.",
       topSongIds: ["song-16"]
     },
@@ -431,8 +431,8 @@ const SPOTIFY_DATA = {
       name: "Beele",
       monthlyListeners: "22,430,900 oyentes mensuales",
       verified: true,
-      cover: "https://i.scdn.co/image/ab676161000051748e10d05db45e77a86256fc5d",
-      banner: "https://i.scdn.co/image/ab676161000051748e10d05db45e77a86256fc5d",
+      cover: "assets/covers/3d0d7d55c18eae08.jpg",
+      banner: "assets/covers/3d0d7d55c18eae08.jpg",
       bio: "Brandon De Jesús López Orozco, conocido como Beele, es un cantautor colombiano de música urbana, dancehall e influencias afrocaribeñas.",
       topSongIds: ["song-13"]
     },
@@ -441,8 +441,8 @@ const SPOTIFY_DATA = {
       name: "Feid",
       monthlyListeners: "45,980,120 oyentes mensuales",
       verified: true,
-      cover: "https://i.scdn.co/image/ab676161000051747e529f4ad13f86c69962cb12",
-      banner: "https://i.scdn.co/image/ab676161000051747e529f4ad13f86c69962cb12",
+      cover: "assets/covers/f1a802cbb500db09.jpg",
+      banner: "assets/covers/f1a802cbb500db09.jpg",
       bio: "Salomón Villada Hoyos, el Ferxxo, es un cantante y productor colombiano que ha revolucionado la escena urbana con su estilo verde inconfundible.",
       topSongIds: ["song-14", "song-2"]
     },
@@ -461,8 +461,8 @@ const SPOTIFY_DATA = {
       name: "Bad Bunny",
       monthlyListeners: "72,450,890 oyentes mensuales",
       verified: true,
-      cover: "https://i.scdn.co/image/ab6761610000517481f47f44084e0a09b5f0fa13",
-      banner: "https://i.scdn.co/image/ab6761610000517481f47f44084e0a09b5f0fa13",
+      cover: "assets/covers/44dd8f7f65adbb5c.jpg",
+      banner: "assets/covers/44dd8f7f65adbb5c.jpg",
       bio: "Benito Antonio Martínez Ocasio es el artista latino más escuchado en la historia de Spotify, rompiendo récords globales continuamente.",
       topSongIds: ["song-12", "song-15"]
     },
@@ -471,8 +471,8 @@ const SPOTIFY_DATA = {
       name: "Mora",
       monthlyListeners: "26,104,330 oyentes mensuales",
       verified: true,
-      cover: "https://i.scdn.co/image/ab67616100005174e6252cc367480d8fe43e711f",
-      banner: "https://i.scdn.co/image/ab67616100005174e6252cc367480d8fe43e711f",
+      cover: "assets/covers/6e20f837a33ff928.jpg",
+      banner: "assets/covers/6e20f837a33ff928.jpg",
       bio: "Gabriel Armando Mora Quintero es un productor, cantante y compositor puertorriqueño caracterizado por su estilo melódico y producciones innovadoras.",
       topSongIds: ["song-14"]
     },
@@ -481,8 +481,8 @@ const SPOTIFY_DATA = {
       name: "Danny Ocean",
       monthlyListeners: "24,800,450 oyentes mensuales",
       verified: true,
-      cover: "https://i.scdn.co/image/ab676161000051746d11079e9ea4fd57b5df6c97",
-      banner: "https://i.scdn.co/image/ab676161000051746d11079e9ea4fd57b5df6c97",
+      cover: "assets/covers/eda15ae6faf9ac0e.jpg",
+      banner: "assets/covers/eda15ae6faf9ac0e.jpg",
       bio: "Daniel Alejandro Morales Reyes es un cantautor y productor venezolano con un sonido pop tropical inconfundible reconocido mundialmente.",
       topSongIds: ["song-5"]
     },
@@ -491,8 +491,8 @@ const SPOTIFY_DATA = {
       name: "J Balvin",
       monthlyListeners: "49,300,100 oyentes mensuales",
       verified: true,
-      cover: "https://i.scdn.co/image/ab676161000051740405b03342c2e56751b9923d",
-      banner: "https://i.scdn.co/image/ab676161000051740405b03342c2e56751b9923d",
+      cover: "assets/covers/c4352bb4cd1cca1a.jpg",
+      banner: "assets/covers/c4352bb4cd1cca1a.jpg",
       bio: "José Álvaro Osorio Balvín es el embajador global del reggaetón de Medellín, llevando la cultura colombiana a festivales de todo el planeta.",
       topSongIds: ["song-8"]
     },
@@ -515,7 +515,7 @@ const SPOTIFY_DATA = {
       title: "Un Verano Sin Ti",
       artist: "Bad Bunny",
       year: 2022,
-      cover: "https://i.scdn.co/image/ab67616d00001e0249d694203245f241a1bcaa72",
+      cover: "assets/covers/e3a9b0ac4c53bbfb.jpg",
       trackIds: ["song-15", "song-12"]
     },
     {
@@ -539,7 +539,7 @@ const SPOTIFY_DATA = {
       title: "MAÑANA SERÁ BONITO",
       artist: "KAROL G",
       year: 2023,
-      cover: "https://i.scdn.co/image/ab67616d00001e02a28f412a17d863410ff9cfbf",
+      cover: "assets/covers/6037ee3917d9576d.jpg",
       trackIds: ["song-2", "song-8"]
     },
     {
@@ -547,7 +547,7 @@ const SPOTIFY_DATA = {
       title: "ESTRELLA",
       artist: "Mora",
       year: 2023,
-      cover: "https://i.scdn.co/image/ab67616d00001e024cbf1f88953e2f87db81f9bd",
+      cover: "assets/covers/2d305d67d0761329.jpg",
       trackIds: ["song-14"]
     },
     {
@@ -555,7 +555,7 @@ const SPOTIFY_DATA = {
       title: "BORONDO",
       artist: "Beele",
       year: 2024,
-      cover: "https://i.scdn.co/image/ab67616d00001e022feb67a486bcf117e7fb15b0",
+      cover: "assets/covers/9c838c96a460bad5.jpg",
       trackIds: ["song-13"]
     }
   ],
@@ -586,7 +586,7 @@ const SPOTIFY_DATA = {
       id: "playlist-top50-global",
       title: "Top 50 - Global",
       owner: "Spotify Charts",
-      cover: "https://charts-images.scdn.co/assets_generated/locale_es/regional/weekly/region_global_default.jpg",
+      cover: "assets/covers/top50-global.svg",
       gradient: "from-[#006450] to-[#121212]",
       description: "Tu actualización diaria con las pistas más reproducidas en el mundo ahora mismo.",
       pinned: false,
@@ -596,7 +596,7 @@ const SPOTIFY_DATA = {
       id: "playlist-top50-ve",
       title: "Top 50 - Venezuela",
       owner: "Spotify Charts",
-      cover: "https://charts-images.scdn.co/assets/locale_en/regional/daily/region_ve_default.jpg",
+      cover: "assets/covers/top50-ve.svg",
       gradient: "from-[#8400e7] to-[#121212]",
       description: "Tu actualización diaria con las pistas más reproducidas en Venezuela.",
       pinned: false,
@@ -619,28 +619,28 @@ const SPOTIFY_DATA = {
     {
       id: "radio-1",
       title: "Radio de Caifanes",
-      cover: "https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/6IdtcAwaNVAggwd6sCKgTI/es-MX",
+      cover: "assets/covers/535db70618801d7f.jpg",
       description: "Con Caifanes, León Larregui, Soda Stereo y Enanitos Verdes.",
       trackIds: ["song-5", "song-10", "song-1"]
     },
     {
       id: "radio-2",
       title: "Radio de Alfredo Olivas",
-      cover: "https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/1gJdf4Yybu4X5A2xYV3NMV/es-MX",
+      cover: "assets/covers/f28ef39bcc70f435.jpg",
       description: "Con Alfredo Olivas, Joss Favela, El Fantasma y Julión Álvarez.",
       trackIds: ["song-10", "song-7"]
     },
     {
       id: "radio-3",
       title: "Radio de La Ley",
-      cover: "https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/5oYHL2SijkMY52gKIhYJNb/es-MX",
+      cover: "assets/covers/382e234485a715c2.jpg",
       description: "Con La Ley, Caifanes, Los Prisioneros y Lucybell.",
       trackIds: ["song-1", "song-6"]
     },
     {
       id: "radio-4",
       title: "Radio de Eden Muñoz",
-      cover: "https://pickasso.spotifycdn.com/image/ab67c0de0000deef/dt/v1/img/radio/artist/1bfl0AU8SqmLkElptOprhC/es-MX",
+      cover: "assets/covers/77a10c8c2d3e288c.jpg",
       description: "Con Eden Muñoz, Edwin Luna y la Trakalosa de Monterrey.",
       trackIds: ["song-10", "song-12"]
     },
@@ -669,17 +669,44 @@ const SPOTIFY_DATA = {
 
   // Search Browse Categories
   categories: [
-    { title: "Música", color: "bg-[#dc148c]", cover: "https://i.scdn.co/image/ab67616d00001e02a28f412a17d863410ff9cfbf" },
+    { title: "Música", color: "bg-[#dc148c]", cover: "assets/covers/6037ee3917d9576d.jpg" },
     { title: "Podcasts", color: "bg-[#006450]", cover: "images (4).jpg" },
     { title: "Eventos en vivo", color: "bg-[#8400e7]", cover: "img10.jpg" },
     { title: "Creados para ti", color: "bg-[#1e3264]", cover: "images (1).jpg" },
-    { title: "Novedades", color: "bg-[#e8115b]", cover: "https://i.scdn.co/image/ab67616d00001e02c2764fc6feb1a7d37cf3cc90" },
+    { title: "Novedades", color: "bg-[#e8115b]", cover: "assets/covers/6c391e8f2783e1f8.jpg" },
     { title: "Urbano Latino", color: "bg-[#bc5900]", cover: "images (5).jpg" },
-    { title: "Pop", color: "bg-[#148a08]", cover: "https://i.scdn.co/image/ab67616d00001e02bed3161d2cb88d1f959bd88f" },
-    { title: "Reggaeton", color: "bg-[#e91429]", cover: "https://i.scdn.co/image/ab6761610000517466041ce9eb4497057cbc3496" },
-    { title: "Verano", color: "bg-[#d84000]", cover: "https://i.scdn.co/image/ab67616d00001e0249d694203245f241a1bcaa72" },
+    { title: "Pop", color: "bg-[#148a08]", cover: "assets/covers/4140f690674bdb6f.jpg" },
+    { title: "Reggaeton", color: "bg-[#e91429]", cover: "assets/covers/659024b1fc2a68ae.jpg" },
+    { title: "Verano", color: "bg-[#d84000]", cover: "assets/covers/e3a9b0ac4c53bbfb.jpg" },
     { title: "Entrenamiento", color: "bg-[#777777]", cover: "img9.jpg" },
     { title: "Relax", color: "bg-[#503750]", cover: "ar.jpg" },
     { title: "Rock", color: "bg-[#e61e32]", cover: "en.jpg" }
   ]
 };
+
+
+// Shared data and resilient persistence (also works when browser storage is blocked).
+window.SPOTIFY_DATA = SPOTIFY_DATA;
+window.spotifyStorage = {
+  read(key, fallback) {
+    try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
+    catch { return fallback; }
+  },
+  write(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* Session remains usable. */ }
+  }
+};
+const savedLikes = window.spotifyStorage.read('spotify_likes', null);
+if (Array.isArray(savedLikes)) {
+  SPOTIFY_DATA.songs.forEach(song => { song.isLiked = savedLikes.includes(song.id); });
+}
+const likedList = SPOTIFY_DATA.playlists.find(list => list.id === 'playlist-liked');
+if (likedList) likedList.trackIds = SPOTIFY_DATA.songs.filter(song => song.isLiked).map(song => song.id);
+const savedLists = window.spotifyStorage.read('spotify_playlists', []);
+if (Array.isArray(savedLists)) {
+  SPOTIFY_DATA.playlists.unshift(...savedLists.filter(list =>
+    typeof list?.id === 'string' && list.id.startsWith('playlist-custom-') &&
+    typeof list.title === 'string' && Array.isArray(list.trackIds)
+  ).map(list => ({ ...list, title: list.title.replace(/[<>"&']/g, ''), owner: SPOTIFY_DATA.currentUser.name,
+    cover: 'images (1).jpg', description: 'Lista creada por el usuario.' })));
+}

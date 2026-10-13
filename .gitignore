@@ -13,3 +13,8 @@ $RECYCLE.BIN/
 .idea/
 *.swp
 *.swo
+
+# Dependencies and test output
+node_modules/
+test-results/
+playwright-report/
