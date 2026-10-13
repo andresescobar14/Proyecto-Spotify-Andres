@@ -338,7 +338,7 @@ img {
     height: auto !important;
     min-height: 76px;
     padding: 8px 10px;
-    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: 8px;
     gap: 8px;
   }
 
